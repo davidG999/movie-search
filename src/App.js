@@ -6,14 +6,6 @@ import SearchIcon from './search.svg'
 
 const API_URL = `http://www.omdbapi.com?apikey=${API_KEY}`;
 
-const movie = {
-  "Title": "Batman v Superman: Dawn of Justice",
-  "Year": "2016",
-  "imdbID": "tt2975590",
-  "Type": "movie",
-  "Poster": "https://m.media-amazon.com/images/M/MV5BYThjYzcyYzItNTVjNy00NDk0LTgwMWQtYjMwNmNlNWJhMzMyXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
-}
-
 const App = () => {
   const [movies, setMovies] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
@@ -26,7 +18,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    searchMovies('superman')
+    searchMovies('')
   }, [])
 
   return (
@@ -38,6 +30,12 @@ const App = () => {
           placeholder="Search for any movie"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyUpCapture={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              e.target.nextElementSibling.click()
+            }
+          }}
         />
         <img
           src={SearchIcon}
@@ -45,11 +43,11 @@ const App = () => {
           onClick={(e) => searchMovies(searchTerm)} />
       </div>
 
-      {movies?.length > 0
+      {movies.length > 0
         ? (
           <div className="container">
-            {movies.map((movie) => (
-              <MovieCard movie={movie} />
+            {movies.map((movie, i) => (
+              <MovieCard movie={movie} key={i} />
             ))}
           </div>
         )
