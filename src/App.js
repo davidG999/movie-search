@@ -18,8 +18,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    searchMovies('')
-  }, [])
+    searchMovies(searchTerm)
+  }, [searchTerm])
 
   return (
     <div className="app">
@@ -43,7 +43,7 @@ const App = () => {
           onClick={(e) => searchMovies(searchTerm)} />
       </div>
 
-      {movies.length > 0
+      {movies?.length > 0
         ? (
           <div className="container">
             {movies.map((movie, i) => (
