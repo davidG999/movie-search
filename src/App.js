@@ -1,13 +1,32 @@
+// React
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+// Styles
 import './index.css';
 
+// Components
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+
+// Pages
+import Trending from './pages/Trending';
+import Movies from './pages/Movies';
+import Series from './pages/Series';
+import Search from './pages/Search';
 
 const App = () => {
   return (
     <div className="text-gray-300">
-      <Header />
-      <Navbar />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Trending />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/series" element={<Series />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+        <Navbar />
+      </BrowserRouter>
     </div>
   );
 }
