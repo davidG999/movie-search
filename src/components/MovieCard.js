@@ -1,18 +1,12 @@
-const MovieCard = ({ movie }) => {
+import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
+import { p_300 } from './../assets/TMDB/posterSizes';
+
+const MovieCard = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
-    <div className="movie">
-      <div>
-        <p>{movie.Year}</p>
-      </div>
-
-      <div>
-        <img src={movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/400'} alt={movie.Title} />
-      </div>
-
-      <div>
-        <span>{movie.Type}</span>
-        <h3>{movie.Title}</h3>
-      </div>
+    <div>
+      <img width="250" src={`${p_300}/${poster}` || posterUnavailable} alt={`Poster. ${title}`} />
+      <span> {media_type === 'movie' ? 'Movie' : 'TV Series'} </span>
+      <span> {date} </span>
     </div>
   );
 }
