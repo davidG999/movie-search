@@ -18,8 +18,8 @@ const Trending = () => {
 
   return (
     <div className="bg-zinc-800">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold tracking-wider  p-1 pb-3">Trending</h2>
-      <div className="h-full">
+      <h2 className="text-slate-300 text-center uppercase font-extrabold tracking-wider p-1 pb-3">Trending</h2>
+      <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
         {movies?.map((m) => {
           return (
             <MovieCard

@@ -3,7 +3,17 @@ module.exports = {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'movie-card': '#343a40'
+      },
+      width: {
+        '50': '200px',
+      },
+      scale: {
+        '103': '1.03',
+      }
+    },
   },
   plugins: [],
 }

@@ -3,10 +3,17 @@ import { p_300 } from './../assets/TMDB/posterSizes';
 
 const MovieCard = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
-    <div>
-      <img width="250" src={`${p_300}/${poster}` || posterUnavailable} alt={`Poster. ${title}`} />
-      <span> {media_type === 'movie' ? 'Movie' : 'TV Series'} </span>
-      <span> {date} </span>
+    <div className="flex px-3 py-3">
+      <div className="bg-movie-card w-50 cursor-pointer hover:scale-103 duration-100">
+        <img src={`${p_300}/${poster}` || posterUnavailable} alt={`Poster. ${title}`} />
+        <div className="text-center font-bold py-1 px-2">
+          {title}
+        </div>
+        <div className="flex justify-between brightness-90 pt-2 px-2 pb-1">
+          <div> {media_type === 'movie' ? 'Movie' : 'TV Series'} </div>
+          <div className="bottom-0 left-0"> {date} </div>
+        </div>
+      </div>
     </div>
   );
 }
