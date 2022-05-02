@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx}",
@@ -17,5 +19,9 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addVariant }) {
+      addVariant('pages', '& > li')
+    })
+],
 }

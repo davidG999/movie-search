@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import axios from "axios";
+import Pagination from './../components/Pagination';
 
 const Trending = () => {
-
+  const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
 
   const fetchTrending = async () => {
-    const { data } = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}`)
+    const { data } = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`)
 
     setMovies(data.results)
   }
 
   useEffect(() => {
     fetchTrending()
-  }, []);
+  }, [page]);
 
   return (
     <div className="bg-zinc-800">
@@ -35,6 +36,8 @@ const Trending = () => {
           )
         })}
       </div>
+
+      <Pagination setPage={setPage} />
     </div>
   );
 }

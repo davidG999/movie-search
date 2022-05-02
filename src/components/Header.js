@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <div className="bg-zinc-800 w-full flex justify-center py-4">
-      <span className="text-5xl text-slate-200">Movie search</span>
+    <div className="bg-zinc-900 w-full flex justify-center py-3 font-bold">
+      <h1 className="text-4xl">Movie search</h1>
     </div>
   );
 }
