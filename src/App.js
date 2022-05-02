@@ -16,7 +16,7 @@ import Search from './pages/Search';
 
 const App = () => {
   return (
-    <div className="text-gray-300">
+    <div className="text-gray-300 bg-zinc-800">
       <BrowserRouter>
         <Header />
         <Routes>
