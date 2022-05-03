@@ -2,11 +2,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import MovieCard from '../components/MovieCard';
 import Pagination from './../components/Pagination';
+import Genres from './../components/Genres';
 
 const Movies = () => {
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  const [genres, setGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
@@ -25,6 +28,15 @@ const Movies = () => {
   return (
     <div className="">
       <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 tracking-wider">Movies</h2>
+
+      <Genres
+        type="movie"
+        genres={genres}
+        selectedGenres={selectedGenres}
+        setGenres={setGenres}
+        setSelectedGenres={setSelectedGenres}
+        setPage={setPage}
+      />
 
       <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
         {movies?.map((m) => {
