@@ -20,8 +20,9 @@ module.exports = {
     },
   },
   plugins: [
-    plugin(function({ addVariant }) {
+    plugin(function ({ addVariant }) {
       addVariant('pages', '& > li')
+      addVariant('removeIcons', '& > img')
     })
-],
+  ],
 }
