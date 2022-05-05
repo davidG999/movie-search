@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import MovieCard from '../components/MovieCard';
 import Pagination from './../components/Pagination';
 import Genres from './../components/Genres';
+import useGenres from './../hooks/useGenres';
 
 const Movies = () => {
   const [page, setPage] = useState(1);
@@ -10,10 +11,11 @@ const Movies = () => {
   const [numOfPages, setNumOfPages] = useState();
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const urlGenres = useGenres(selectedGenres);
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`
     )
 
     setMovies(data.results)
@@ -23,7 +25,7 @@ const Movies = () => {
   useEffect(() => {
     fetchMovies()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, urlGenres]);
 
   return (
     <div className="">
