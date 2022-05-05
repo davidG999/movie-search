@@ -2,10 +2,10 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import removeIcon from '../assets/icons/remove.svg'
 
-const GenreChip = ({ genreTitle, handleAdd, isActive }) => {
+const GenreChip = ({ genreTitle, handleClick, isActive }) => {
   return (
     <span
-      onClick={handleAdd}
+      onClick={handleClick}
       className={
         `px-2 py-1 my-1 rounded-full font-semibold text-sm flex align-center w-max cursor-pointer select-none transition duration-150 ease-in-out 
         ${isActive ? 'bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-700 removeIcons:hover:brightness-90'
@@ -35,6 +35,14 @@ const Genres = ({
     setPage(1);
   }
 
+  const handleRemove = (genre) => {
+    setSelectedGenres(
+      selectedGenres.filter((selected) => selected.id !== genre.id)
+    );
+    setGenres([...genres, genre]);
+    setPage(1);
+  };
+
   const fetchGenres = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
@@ -58,6 +66,7 @@ const Genres = ({
 
             genreTitle={genre.name}
             isActive={true}
+            handleClick={() => handleRemove(genre)}
           />
         )
       })}
@@ -68,7 +77,7 @@ const Genres = ({
             key={genre.id}
 
             genreTitle={genre.name}
-            handleAdd={() => handleAdd(genre)}
+            handleClick={() => handleAdd(genre)}
           />
         )
       })}
