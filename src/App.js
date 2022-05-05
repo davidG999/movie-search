@@ -1,62 +1,32 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import MovieCard from './MovieCard';
-import SearchIcon from './search.svg'
+// React
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-const API_URL = `http://www.omdbapi.com?apikey=${process.env.REACT_APP_API_KEY}`;
+// Styles
+import './index.css';
+
+// Components
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+
+// Pages
+import Trending from './pages/Trending';
+import Movies from './pages/Movies';
+import Series from './pages/Series';
+import Search from './pages/Search';
 
 const App = () => {
-  const [movies, setMovies] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const searchMovies = async (title) => {
-    const response = await fetch(`${API_URL}&s=${title}`)
-    const data = await response.json()
-
-    setMovies(data.Search)
-  }
-
-  useEffect(() => {
-    searchMovies(searchTerm)
-  }, [searchTerm])
-
   return (
-    <div className="app">
-      <h1>Movie search</h1>
-
-      <div className="search">
-        <input
-          placeholder="Search for any movie"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyUpCapture={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault()
-              e.target.nextElementSibling.click()
-            }
-          }}
-        />
-        <img
-          src={SearchIcon}
-          alt="search"
-          onClick={(e) => searchMovies(searchTerm)} />
-      </div>
-
-      {movies?.length > 0
-        ? (
-          <div className="container">
-            {movies.map((movie, i) => (
-              <MovieCard movie={movie} key={i} />
-            ))}
-          </div>
-        )
-        : (
-          <div className="empty">
-            <h2>No movies found</h2>
-          </div>
-        )
-      }
-
+    <div className="text-gray-300 bg-zinc-800">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Trending />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/series" element={<Series />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+        <Navbar />
+      </BrowserRouter>
     </div>
   );
 }

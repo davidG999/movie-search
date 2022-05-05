@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30">
+  
+<g transform="matrix(2.142857142857143,0,0,2.142857142857143,0,0)"><g>
+    <rect x="0.5" y="3" width="13" height="10.5" rx="1" style="fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round"></rect>
+    <rect x="3" y="5.5" width="8" height="5.5" rx="1" style="fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round"></rect>
+    <polyline points="5 0.5 7 3 9 0.5" style="fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round"></polyline>
+  </g></g></svg>
