@@ -3,15 +3,15 @@ import { p_300 } from './../assets/TMDB/posterSizes';
 
 const MovieCard = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
-    <div className="flex px-3 py-3">
-      <div className="relative bg-movie-card w-50 cursor-pointer hover:scale-103 duration-100">
-        <span className={`
-          absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 
-          ${vote_average >= 7 ? 'bg-high-rating' : 'bg-low-rating'}
-          `}>
+    <div className="flex p-3">
+      <div className="relative bg-movie-card w-50 cursor-pointer hover:scale-103 duration-100 rounded-t-lg rounded">
+        <span className={
+          `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 
+          ${vote_average >= 7 ? 'bg-high-rating' : 'bg-low-rating'}`
+        }>
           {vote_average}
         </span>
-        <img src={`${p_300}/${poster}` || posterUnavailable} alt={`Poster. ${title}`} />
+        <img src={`${p_300}/${poster}` || posterUnavailable} className="rounded-t" alt='Poster' />
         <div className="text-center font-bold py-1 px-2">
           {title}
         </div>
