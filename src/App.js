@@ -13,6 +13,7 @@ import Trending from './pages/Trending';
 import Movies from './pages/Movies';
 import Series from './pages/Series';
 import Search from './pages/Search';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/movies" element={<Movies />} />
           <Route path="/series" element={<Series />} />
           <Route path="/search" element={<Search />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Navbar />
       </BrowserRouter>
