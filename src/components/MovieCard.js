@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
+
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
 import { p_300 } from './../assets/TMDB/posterSizes';
 
 const MovieCard = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
-    <div className="flex p-3">
+    <Link to={id + media_type[0]} className="flex p-3">
       <div className="relative bg-movie-card w-50 cursor-pointer hover:scale-103 duration-100 rounded-t-lg rounded">
         <span className={
           `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 
@@ -20,7 +22,7 @@ const MovieCard = ({ id, poster, title, date, media_type, vote_average }) => {
           <div className="bottom-0 left-0"> {date} </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
