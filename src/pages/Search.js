@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Pagination from './../components/Pagination';
-import MovieCard from './../components/MovieCard';
+import SingleContentCard from './../components/SingleContentCard';
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -60,7 +60,7 @@ const Search = () => {
 
       <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
         {content?.map((c) => (
-          <MovieCard
+          <SingleContentCard
             key={c.id}
 
             id={c.id}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import MovieCard from '../components/MovieCard';
+import SingleContentCard from '../components/SingleContentCard';
 import Pagination from './../components/Pagination';
 import Genres from './../components/Genres';
 import useGenres from './../hooks/useGenres';
@@ -43,7 +43,7 @@ const Series = () => {
       <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
         {movies?.map((m) => {
           return (
-            <MovieCard
+            <SingleContentCard
               key={m.id}
 
               id={m.id}

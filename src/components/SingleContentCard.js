@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
-import { p_300 } from './../assets/TMDB/posterSizes';
+import { p_300 } from '../assets/TMDB/posterSizes';
 
-const MovieCard = ({ id, poster, title, date, media_type, vote_average }) => {
+const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
     <Link to={id + media_type[0]} className="flex p-3">
       <div className="relative bg-movie-card w-50 cursor-pointer hover:scale-103 duration-100 rounded-t-lg rounded">
@@ -26,4 +26,4 @@ const MovieCard = ({ id, poster, title, date, media_type, vote_average }) => {
   );
 }
 
-export default MovieCard;
+export default SingleContentCard;

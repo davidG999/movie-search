@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MovieCard from "../components/MovieCard";
+import SingleContentCard from "../components/SingleContentCard";
 import axios from "axios";
 import Pagination from './../components/Pagination';
 
@@ -24,7 +24,7 @@ const Trending = () => {
       <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
         {movies?.map((m) => {
           return (
-            <MovieCard
+            <SingleContentCard
               key={m.id}
 
               id={m.id}
