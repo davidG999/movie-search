@@ -23,6 +23,10 @@ const SingleContentInfo = () => {
 
   const { title, name, first_air_date, release_date, runtime, episode_run_time, overview, poster_path } = content
 
+  const minutesToHours = (m) => {
+    return `${Math.trunc(m / 60)}h ${m % 60}m`
+  }
+
   useEffect(() => {
     fetchSingleContentInfo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +42,7 @@ const SingleContentInfo = () => {
         <div className="flex flex-col flex-grow px-8 py-4 bg-color-333">
           <h3 className="font-bold text-4xl text-gray-200 movie--title"> {title || name} </h3>
           <span className="text-xl">{first_air_date || release_date}</span>
-          <span className="text-xl">{episode_run_time || runtime} min</span>
+          <span className="text-xl">{episode_run_time ? episode_run_time + 'm' : minutesToHours(runtime)}</span>
           <div className="flex-grow mt-3">
             <p className="text-xl text-gray-100 ">{overview}</p>
           </div>
