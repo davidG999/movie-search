@@ -27,6 +27,13 @@ const SingleContentInfo = () => {
     return `${Math.trunc(m / 60)}h ${m % 60}m`
   }
 
+  function convertDate(date) {
+    console.log(date)
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let temp_date = date.split("-")
+    return `${months[Number(temp_date[1]) - 1]} ${temp_date[2]}, ${temp_date[0]}`
+  }
+
   useEffect(() => {
     fetchSingleContentInfo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,18 +46,14 @@ const SingleContentInfo = () => {
         <div className="md:flex-shrink-0">
           <img src={`${p_300}${poster_path}` || posterUnavailable} className="rounded-t" alt='Poster' />
         </div>
+
         <div className="flex flex-col flex-grow px-8 py-4 bg-color-333">
           <h3 className="font-bold text-4xl text-gray-200 movie--title"> {title || name} </h3>
-          <span className="text-xl">{first_air_date || release_date}</span>
+          <span className="text-xl">{first_air_date || release_date ? convertDate(first_air_date || release_date) : null}</span>
           <span className="text-xl">{episode_run_time ? episode_run_time + 'm' : minutesToHours(runtime)}</span>
           <div className="flex-grow mt-3">
             <p className="text-xl text-gray-100 ">{overview}</p>
           </div>
-
-          {/* <div className="flex justify-between mb-2">
-            <button className="mr-4 text-gray-200">More Info</button>
-            <button className="font-bold py-2 px-4 rounded bg-orange-200 text-orange-700">Add to List</button>
-          </div> */}
         </div>
 
       </div>
