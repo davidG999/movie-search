@@ -5,12 +5,12 @@ import Pagination from './../components/Pagination';
 
 const Trending = () => {
   const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState([]);
+  const [content, setContent] = useState([]);
 
   const fetchTrending = async () => {
     const { data } = await axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`)
 
-    setMovies(data.results)
+    setContent(data.results)
   }
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Trending = () => {
     <div className="">
       <h2 className="text-slate-300 text-center uppercase font-extrabold tracking-wider p-1 pb-3">Trending</h2>
       <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
-        {movies?.map((m) => {
+        {content?.map((m) => {
           return (
             <SingleContentCard
               key={m.id}
