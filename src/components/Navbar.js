@@ -4,6 +4,7 @@ import trendingIcon from '../assets/icons/trendingIcon.svg';
 import movieIcon from '../assets/icons/movieIcon.svg';
 import tvIcon from '../assets/icons/tvIcon.svg';
 import searchIcon from '../assets/icons/searchIcon.svg';
+import tmdbLogo from '../assets/TMDB/tmdb-logo.svg';
 
 const NavItem = ({ icon, title, page }) => {
   return (
@@ -21,6 +22,12 @@ const Navbar = () => {
       <NavItem icon={movieIcon} title="Movies" page="/movies" />
       <NavItem icon={tvIcon} title="TV Series" page="/series" />
       <NavItem icon={searchIcon} title="Search" page="/search" />
+
+      <div className="absolute bottom-0 right-0 p-1">
+        <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" >
+          <img src={tmdbLogo} alt="TMDB" width={40} />
+        </a>
+      </div>
     </div>
   );
 }
