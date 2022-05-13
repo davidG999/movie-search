@@ -5,7 +5,7 @@ import { p_300 } from '../assets/TMDB/posterSizes';
 
 const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }) => {
   return (
-    <Link to={id + media_type[0]} className="flex p-3">
+    <Link to={id + media_type[0]} className="flex m-3">
       <div className="relative bg-movie-card w-50 cursor-pointer hover:scale-103 duration-100 rounded-t-lg rounded">
         <span className={
           `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 

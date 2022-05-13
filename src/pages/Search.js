@@ -65,7 +65,7 @@ const Search = () => {
 
             id={c.id}
             poster={c.poster_path}
-            title={c.title || c.nace}
+            title={c.title || c.name}
             date={c.release_date || c.first_air_date}
             media_type={type ? "tv" : "movie"}
             vote_average={c.vote_average}

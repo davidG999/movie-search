@@ -18,7 +18,7 @@ import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
-    <div className="text-gray-300 bg-zinc-800">
+    <div className="text-gray-300 bg-zinc-800 selection:bg-slate-700 selection:text-cyan-400">
       <BrowserRouter>
         <Header />
         <Routes>
