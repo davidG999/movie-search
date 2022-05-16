@@ -7,7 +7,6 @@ import './index.css';
 // Components
 import Header from './components/Header';
 import Navbar from './components/Navbar';
-import SingleContentInfo from './components/SingleContentInfo';
 
 // Pages
 import Trending from './pages/Trending';
@@ -15,6 +14,7 @@ import Movies from './pages/Movies';
 import Series from './pages/Series';
 import Search from './pages/Search';
 import NotFound from './pages/NotFound';
+import SingleContentInfo from './pages/SingleContentInfo';
 
 const App = () => {
   return (

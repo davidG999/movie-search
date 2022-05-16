@@ -21,14 +21,20 @@ const SingleContentInfo = () => {
     setContent(data)
   }
 
-  const { title, name, first_air_date, release_date, runtime, episode_run_time, overview, poster_path } = content
+  const {
+    title, name,
+    first_air_date, release_date,
+    runtime, episode_run_time,
+    overview,
+    poster_path,
+  }
+    = content
 
   const minutesToHours = (m) => {
     return `${Math.trunc(m / 60)}h ${m % 60}m`
   }
 
   function convertDate(date) {
-    console.log(date)
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     let temp_date = date.split("-")
     return `${months[Number(temp_date[1]) - 1]} ${temp_date[2]}, ${temp_date[0]}`
