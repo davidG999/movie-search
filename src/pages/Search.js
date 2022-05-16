@@ -73,7 +73,7 @@ const Search = () => {
         ))}
 
         {searchText &&
-          !content &&
+          content.length < 1 &&
           (type ? <h2>No series found</h2> : <h2>No movies found</h2>)}
       </div>
 

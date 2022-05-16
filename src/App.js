@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 
 // Components
-import Header from './components/Header';
 import Navbar from './components/Navbar';
 
 // Pages
@@ -20,7 +19,7 @@ const App = () => {
   return (
     <div className="text-gray-300 bg-zinc-800 selection:bg-slate-700 selection:text-cyan-400">
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Trending />} />
           <Route path="/:id" element={<SingleContentInfo />} />
