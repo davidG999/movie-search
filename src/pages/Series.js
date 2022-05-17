@@ -40,7 +40,7 @@ const Series = () => {
         setPage={setPage}
       />
 
-      <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
+      <div className="layout">
         {series?.map((m) => {
           return (
             <SingleContentCard

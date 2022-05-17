@@ -72,10 +72,10 @@ const Search = () => {
           />
         ))}
 
-        {searchText &&
-          content.length < 1 &&
-          (type ? <h2>No series found</h2> : <h2>No movies found</h2>)}
       </div>
+      {searchText &&
+        content.length < 1 &&
+        (type ? <h2 className="text-center">No series found</h2> : <h2 className="text-center">No movies found</h2>)}
 
       {numOfPages > 1 && <Pagination setPage={setPage} />}
     </div>
