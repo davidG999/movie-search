@@ -5,6 +5,7 @@ import Pagination from './../components/Pagination';
 
 const Trending = () => {
   const [page, setPage] = useState(1);
+  const [numOfPages, setNumOfPages] = useState();
   const [content, setContent] = useState([]);
   const [time, setTime] = useState('day');
 
@@ -14,6 +15,7 @@ const Trending = () => {
     )
 
     setContent(data.results)
+    setNumOfPages(data.total_pages)
   }
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const Trending = () => {
         })}
       </div>
 
-      <Pagination setPage={setPage} />
+      {numOfPages > 1 && <Pagination setPage={setPage} numOfPages={numOfPages > 10 ? 10 : numOfPages} currentPage={page} />}
     </div>
   );
 }

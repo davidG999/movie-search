@@ -57,7 +57,7 @@ const Series = () => {
         })}
       </div>
 
-      {numOfPages > 1 && <Pagination setPage={setPage} />}
+      {numOfPages > 1 && <Pagination setPage={setPage} numOfPages={numOfPages > 10 ? 10 : numOfPages} currentPage={page} />}
 
     </div>
   );

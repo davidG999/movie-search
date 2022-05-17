@@ -77,7 +77,7 @@ const Search = () => {
         content.length < 1 &&
         (type ? <h2 className="text-center">No series found</h2> : <h2 className="text-center">No movies found</h2>)}
 
-      {numOfPages > 1 && <Pagination setPage={setPage} />}
+      {numOfPages > 1 && <Pagination setPage={setPage} numOfPages={numOfPages > 10 ? 10 : numOfPages} currentPage={page} />}
     </div>
 
   );

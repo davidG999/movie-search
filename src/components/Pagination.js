@@ -1,4 +1,4 @@
-const Pagination = ({ setPage, numOfPages = 10 }) => {
+const Pagination = ({ setPage, numOfPages = 10, currentPage }) => {
   const handlePageChange = (page) => {
     setPage(page)
     window.scroll(0, 0)
@@ -22,7 +22,7 @@ const Pagination = ({ setPage, numOfPages = 10 }) => {
       pages.push(<PageNumberElement number={i + 1} key={i + 1} />)
     }
 
-    return pages.map((e, i) => e)
+    return pages.map((e) => e)
   }
 
   return (
@@ -30,13 +30,15 @@ const Pagination = ({ setPage, numOfPages = 10 }) => {
       <ul className="inline-flex
         pages:cursor-pointer pages:py-2 pages:px-3 pages:border pages:border-gray-700 pages:bg-slate-800 pages:text-gray-200">
 
-        <li className="hover:bg-gray-600 rounded-l-lg">
+        <li className="hover:bg-gray-600 rounded-l-lg"
+          onClick={() => handlePageChange(--currentPage)}>
           Previous
         </li>
 
         {generatePages()}
 
-        <li className="hover:bg-gray-600 rounded-r-lg">
+        <li className="hover:bg-gray-600 rounded-r-lg"
+          onClick={() => handlePageChange(++currentPage)}>
           Next
         </li>
 
