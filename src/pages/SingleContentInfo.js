@@ -4,11 +4,13 @@ import axios from 'axios';
 import { p_300 } from '../assets/TMDB/posterSizes';
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
 
+import convertDate from '../utils/convertDate';
+import minutesToHours from './../utils/minutesToHours';
+
 const SingleContentInfo = () => {
   const { id } = useParams()
   let { pathname } = useLocation();
   const [content, setContent] = useState({});
-
   const media_type = pathname.slice(-1) === 't' ? 'tv' : 'movie'
 
   const fetchSingleContentInfo = async () => {
@@ -28,17 +30,7 @@ const SingleContentInfo = () => {
     overview,
     poster_path,
   }
-    = content
-
-  const minutesToHours = (m) => {
-    return `${Math.trunc(m / 60)}h ${m % 60}m`
-  }
-
-  function convertDate(date) {
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    let temp_date = date.split("-")
-    return `${months[Number(temp_date[1]) - 1]} ${temp_date[2]}, ${temp_date[0]}`
-  }
+    = content;
 
   useEffect(() => {
     fetchSingleContentInfo()
