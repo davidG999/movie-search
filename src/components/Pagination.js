@@ -1,8 +1,5 @@
-const Pagination = ({ setPage, numOfPages = 10, currentPage }) => {
-  const handlePageChange = (page) => {
-    setPage(page)
-    window.scroll(0, 0)
-  }
+import arrowLeft from '../assets/icons/arrow-left.svg'
+import arrowRight from '../assets/icons/arrow-right.svg'
 
   const PageNumberElement = ({ number }) => {
     return (
