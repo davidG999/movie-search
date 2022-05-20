@@ -7,11 +7,7 @@ import { p_300 } from '../assets/TMDB/posterSizes';
 const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }) => {
   const [underline, setUnderline] = useState('');
 
-  const ratingStyles =
-    vote_average >= 7 ? 'bg-green-600'
-      : vote_average >= 5 ? 'bg-orange-600'
-        : vote_average >= 0.1 ? 'bg-red-600'
-          : 'bg-blue-600 text-white w-12';
+  const ratingBg = `bg-${vote_average >= 7 ? 'green' : vote_average >= 5 ? 'orange' : vote_average >= 0.1 ? 'red' : 'blue'}-600`
 
   const displayTitle = () => {
     return title.length > 30 ?
@@ -32,7 +28,7 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
           title={!vote_average ? 'Information not available' : null}
           className={
             `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 
-          ${ratingStyles}`
+          ${ratingBg}`
           }>
           {vote_average || 'N/A'}
         </span>
@@ -50,8 +46,7 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
 
         <div className="flex justify-between brightness-90 pt-2 px-2 pb-1">
           <div> {media_type === 'movie' ? 'Movie' : 'TV'} </div>
-          <div className="bottom-0 left-0"> {date?.split('-')[0]} </div>
-
+          <div> {date?.split('-')[0]} </div>
         </div>
       </div>
     </div>

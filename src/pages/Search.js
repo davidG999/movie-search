@@ -43,22 +43,26 @@ const Search = () => {
         />
       </div>
 
-      <ul className="p-1 m-3 flex text-center text-gray-100">
+      <ul className="p-1 m-3 flex justify-center text-center font-semibold text-gray-100 select-none">
         <li
           onClick={() => {
             setType(0)
             setPage(1);
           }}
-          className="mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded"> Movies </li>
+          className={`mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded hover:scale-103
+          ${!type && 'bg-slate-600'}
+          `}> Movies </li>
         <li
           onClick={() => {
             setType(1);
             setPage(1);
           }}
-          className="mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded"> TV Series</li>
+          className={`mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded hover:scale-103
+          ${type && 'bg-slate-600'}
+          `}> TV Series </li>
       </ul>
 
-      <div className="flex flex-wrap justify-evenly w-2/3 my-0 mx-auto h-full">
+      <div className="layout">
         {content?.map((c) => (
           <SingleContentCard
             key={c.id}

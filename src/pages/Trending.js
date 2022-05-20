@@ -47,17 +47,19 @@ const Trending = () => {
       </ul>
 
       <div className="layout">
-        {content?.map((m) => {
+        {content?.map((c) => {
           return (
             <SingleContentCard
-              key={m.id}
+              key={c.id}
 
-              id={m.id}
-              poster={m.poster_path}
-              title={m.title || m.name}
-              date={m.release_date || m.first_air_date}
-              media_type={m.media_type}
-              vote_average={m.vote_average}
+              id={c.id}
+              poster={c.poster_path}
+              title={c.title || c.name}
+              date={c.release_date || c.first_air_date}
+              media_type={c.media_type}
+              vote_average={c.vote_average}
+              vote_count={c.vote_count}
+              popularity={c.popularity}
             />
           )
         })}
