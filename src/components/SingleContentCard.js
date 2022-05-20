@@ -11,29 +11,41 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
     vote_average >= 7 ? 'bg-green-600'
       : vote_average >= 5 ? 'bg-orange-600'
         : vote_average >= 0.1 ? 'bg-red-600'
-          : 'bg-blue-600 text-white w-10';
+          : 'bg-blue-600 text-white w-12';
+
+  const displayTitle = () => {
+    return title.length > 30 ?
+      title.split(' ')
+        .splice(0, title.split(' ').length - 2)
+        .join(' ') + '...' :
+      title.length > 25 ?
+        title.split(' ')
+          .splice(0, title.split(' ').length - 1)
+          .join(' ') + '...'
+        : title
+  }
 
   return (
     <div className="flex m-3 text-slate-100">
       <div className="relative bg-movie-card w-50 hover:bg-gray-600 hover:shadow-xl duration-100 rounded-t-lg rounded">
-        <span 
-        title={!vote_average ? 'Information not available' : null}
-        className={
-          `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 
+        <span
+          title={!vote_average ? 'Information not available' : null}
+          className={
+            `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 
           ${ratingStyles}`
-        }>
+          }>
           {vote_average || 'N/A'}
         </span>
         <Link to={id + media_type[0]}>
           <img src={poster ? `${p_300}/${poster}` : posterUnavailable} className="rounded-t" alt='Poster' />
-          <div
+          <h2
             className={`text-center font-bold py-1 px-2 ${underline}`}
             onMouseEnter={() => setUnderline('underline underline-offset-1')}
             onMouseLeave={() => setUnderline('')}
             title={title}
           >
-            {title.length > 30 ? title.slice(0, 30) + '...' : title}
-          </div>
+            {displayTitle()}
+          </h2>
         </Link>
 
         <div className="flex justify-between brightness-90 pt-2 px-2 pb-1">
