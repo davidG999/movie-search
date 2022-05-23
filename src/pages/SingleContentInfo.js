@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { p_300 } from '../assets/TMDB/posterSizes';
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
@@ -9,9 +9,9 @@ import minutesToHours from './../utils/minutesToHours';
 
 const SingleContentInfo = () => {
   const { id } = useParams()
-  let { pathname } = useLocation();
   const [content, setContent] = useState({});
   const [contentRatings, setContentRatings] = useState();
+  const media_type = id.slice(-1) === 't' ? 'tv' : 'movie'
 
   const fetchSingleContentInfo = async () => {
     const { data } = await axios.get(
@@ -33,10 +33,12 @@ const SingleContentInfo = () => {
 
   const {
     title, name,
+    vote_average, vote_count,
     first_air_date, release_date,
     runtime, episode_run_time,
     overview,
     poster_path,
+    popularity
   }
     = content;
 
@@ -49,6 +51,22 @@ const SingleContentInfo = () => {
     }
     return minutesToHours(runtime)
   }
+
+  const ratingBg = `bg-${vote_average >= 7 ? 'green' : vote_average >= 5 ? 'orange' : vote_average >= 0.1 ? 'red' : 'blue'}-600`
+
+  function kFormatter(num) {
+    return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
+  }
+
+  const popularityInfo = `Popularity is based on the information below
+  • Number of votes for the day
+  • Number of views for the day
+  • Number of users who marked it as a "favourite" for the day
+  • Number of users who added it to their "watchlist" for the day
+  • Release date / Next/last episode to air date
+  • Number of total votes 
+  • Previous days score
+  `
 
   useEffect(() => {
     fetchSingleContentInfo()
@@ -84,6 +102,32 @@ const SingleContentInfo = () => {
                 </div>}
             </div>
           </div>
+
+          <div className="flex text-center mb-4">
+            <div className="flex-col mr-6">
+              <span className='font-semibold inline-block w-full'> TMDb rating </span>
+              <div className="flex">
+                <span
+                  title={!vote_average ? 'Information not available' : null}
+                  className={`text-white inline-block w-full h-full p-1.5 font-bold text-md
+                      ${ratingBg}`
+                  }>
+                  {vote_average && vote_average + '/10' || 'N/A'}
+                </span>
+                <span
+                  title="Number of votes"
+                  className='bg-gray-500 text-white inline-block w-full h-full p-1.5 font-medium opacity-75'>
+                  {vote_count ? kFormatter(vote_count) : 'N/A'}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <span title={popularityInfo} className='font-semibold inline-block w-full'> Popularity </span>
+              <span title={popularityInfo} className='border border-slate-500 w-full h-full pt-1.5'> {popularity && Math.floor(popularity)} </span>
+            </div>
+          </div>
+
           <div className="flex-grow mt-3 ">
             <p className="text-xl text-gray-100">{overview || 'No overview'}</p>
           </div>
