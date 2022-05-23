@@ -2,7 +2,7 @@
 
 ## ⚠ WORK IN PROGRESS ⚠
 
-But you can still visit the latest version: <https://49e9c902.movie-search-aoo.pages.dev/>
+But you can still visit the latest version: <https://movie-search-aoo.pages.dev/>
 
 ## Available Scripts
 

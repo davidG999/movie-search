@@ -133,8 +133,6 @@ const SingleContentInfo = () => {
           </div>
         </div>
       </div>
-
-      </div>
     </div>
   );
 }

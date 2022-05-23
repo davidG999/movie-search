@@ -27,8 +27,7 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
         <span
           title={!vote_average ? 'Information not available' : null}
           className={
-            `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 
-          ${ratingBg}`
+            `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 ${ratingBg}`
           }>
           {vote_average || 'N/A'}
         </span>
