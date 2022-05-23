@@ -11,7 +11,7 @@ const SingleContentInfo = () => {
   const { id } = useParams()
   let { pathname } = useLocation();
   const [content, setContent] = useState({});
-  const media_type = pathname.slice(-1) === 't' ? 'tv' : 'movie'
+  const [contentRatings, setContentRatings] = useState();
 
   const fetchSingleContentInfo = async () => {
     const { data } = await axios.get(
@@ -21,6 +21,14 @@ const SingleContentInfo = () => {
     )
 
     setContent(data)
+  }
+
+  const fetchTvContentRatings = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${id.slice(0, -1)}/content_ratings?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    )
+
+    data.results[0] && setContentRatings(data.results[0].rating)
   }
 
   const {
@@ -44,6 +52,7 @@ const SingleContentInfo = () => {
 
   useEffect(() => {
     fetchSingleContentInfo()
+    id.slice(-1) === 't' && fetchTvContentRatings()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -52,17 +61,34 @@ const SingleContentInfo = () => {
       <div className="w-full rounded overflow-hidden shadow-lg m-4 flex justify-between">
 
         <div className="md:flex-shrink-0">
-          <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded-t" alt='Poster' />
+          <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded" alt='Poster' />
         </div>
 
-        <div className="flex flex-col flex-grow px-8 py-4 bg-color-333">
-          <h3 className="font-bold text-4xl text-gray-200 movie--title"> {title || name} </h3>
-          <span className="text-xl">{first_air_date || release_date ? convertDate(first_air_date || release_date) : null}</span>
-          <span className="text-xl"> {checkForRuntime()} </span>
-          <div className="flex-grow mt-3">
+        <div className="flex-col flex-grow px-6 bg-color-333">
+          <h3 className="font-bold text-5xl text-gray-200 mb-4"> {title || name} </h3>
+
+          <div className="flex justify-between mb-4">
+            <div className="flex text-center">
+              <div className="flex flex-col mr-6">
+                <span className='font-semibold inline-block w-full'> Date </span>
+                <span className='inline-block w-full border border-slate-500 p-1.5'> {first_air_date || release_date ? convertDate(first_air_date || release_date) : 'N/A'} </span>
+              </div>
+              <div className="flex flex-col mr-6">
+                <span className='font-semibold inline-block w-full'> Runtime </span>
+                <span className='inline-block w-full border border-slate-500 p-1.5'> {checkForRuntime() || 'N/A'} </span>
+              </div>
+              {contentRatings &&
+                <div className="flex flex-col mr-6">
+                  <span className='font-semibold inline-block w-full'> Content rating </span>
+                  <span className='inline-block w-full border border-slate-500 p-1.5'> {contentRatings} </span>
+                </div>}
+            </div>
+          </div>
+          <div className="flex-grow mt-3 ">
             <p className="text-xl text-gray-100">{overview || 'No overview'}</p>
           </div>
         </div>
+      </div>
 
       </div>
     </div>
