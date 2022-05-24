@@ -31,7 +31,7 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
           }>
           {vote_average || 'N/A'}
         </span>
-        <Link to={id + media_type[0]}>
+        <Link to={'/' + id + media_type[0]}>
           <img src={poster ? `${p_300}/${poster}` : posterUnavailable} className="rounded-t" alt='Poster' />
           <h2
             className={`text-center font-bold py-1 px-2 ${underline}`}
