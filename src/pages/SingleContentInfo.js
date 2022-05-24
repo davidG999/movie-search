@@ -6,11 +6,13 @@ import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
 
 import convertDate from '../utils/convertDate';
 import minutesToHours from './../utils/minutesToHours';
+import NotFound from './NotFound';
 
 const SingleContentInfo = () => {
   const { id } = useParams()
   const [content, setContent] = useState({});
   const [contentRatings, setContentRatings] = useState();
+  const [notFound, setNotFound] = useState(false);
   const media_type = id.slice(-1) === 't' ? 'tv' : 'movie'
 
   const fetchSingleContentInfo = async () => {
@@ -18,9 +20,9 @@ const SingleContentInfo = () => {
       `https://api.themoviedb.org/3/${media_type
       }/${id.slice(0, -1)
       }?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-    )
+    ).catch(err => { if (err.response.status === 404) setNotFound(<NotFound />) })
 
-    setContent(data)
+    data && setContent(data)
   }
 
   const fetchTvContentRatings = async () => {
@@ -75,65 +77,68 @@ const SingleContentInfo = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap">
-      <div className="w-full rounded overflow-hidden shadow-lg m-4 flex justify-between">
+    <>
+      {notFound ||
+        <div className="flex flex-wrap">
+          <div className="w-full rounded overflow-hidden shadow-lg m-4 flex justify-between">
 
-        <div className="md:flex-shrink-0">
-          <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded" alt='Poster' />
-        </div>
-
-        <div className="flex-col flex-grow px-6 bg-color-333">
-          <h3 className="font-bold text-5xl text-gray-200 mb-4"> {title || name} </h3>
-
-          <div className="flex justify-between mb-4">
-            <div className="flex text-center">
-              <div className="flex flex-col mr-6">
-                <span className='font-semibold inline-block w-full'> Date </span>
-                <span className='inline-block w-full border border-slate-500 p-1.5'> {first_air_date || release_date ? convertDate(first_air_date || release_date) : 'N/A'} </span>
-              </div>
-              <div className="flex flex-col mr-6">
-                <span className='font-semibold inline-block w-full'> Runtime </span>
-                <span className='inline-block w-full border border-slate-500 p-1.5'> {checkForRuntime() || 'N/A'} </span>
-              </div>
-              {contentRatings &&
-                <div className="flex flex-col mr-6">
-                  <span className='font-semibold inline-block w-full'> Content rating </span>
-                  <span className='inline-block w-full border border-slate-500 p-1.5'> {contentRatings} </span>
-                </div>}
+            <div className="md:flex-shrink-0">
+              <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded" alt='Poster' />
             </div>
-          </div>
 
-          <div className="flex text-center mb-4">
-            <div className="flex-col mr-6">
-              <span className='font-semibold inline-block w-full'> TMDb rating </span>
-              <div className="flex">
-                <span
-                  title={!vote_average ? 'Information not available' : null}
-                  className={`text-white inline-block w-full h-full p-1.5 font-bold text-md
+            <div className="flex-col flex-grow px-6 bg-color-333">
+              <h3 className="font-bold text-5xl text-gray-200 mb-4"> {title || name} </h3>
+
+              <div className="flex justify-between mb-4">
+                <div className="flex text-center">
+                  <div className="flex flex-col mr-6">
+                    <span className='font-semibold inline-block w-full'> Date </span>
+                    <span className='inline-block w-full border border-slate-500 p-1.5'> {first_air_date || release_date ? convertDate(first_air_date || release_date) : 'N/A'} </span>
+                  </div>
+                  <div className="flex flex-col mr-6">
+                    <span className='font-semibold inline-block w-full'> Runtime </span>
+                    <span className='inline-block w-full border border-slate-500 p-1.5'> {checkForRuntime() || 'N/A'} </span>
+                  </div>
+                  {contentRatings &&
+                    <div className="flex flex-col mr-6">
+                      <span className='font-semibold inline-block w-full'> Content rating </span>
+                      <span className='inline-block w-full border border-slate-500 p-1.5'> {contentRatings} </span>
+                    </div>}
+                </div>
+              </div>
+
+              <div className="flex text-center mb-4">
+                <div className="flex-col mr-6">
+                  <span className='font-semibold inline-block w-full'> TMDb rating </span>
+                  <div className="flex">
+                    <span
+                      title={!vote_average ? 'Information not available' : null}
+                      className={`text-white inline-block w-full h-full p-1.5 font-bold text-md
                       ${ratingBg}`
-                  }>
-                  {vote_average && vote_average + '/10' || 'N/A'}
-                </span>
-                <span
-                  title="Number of votes"
-                  className='bg-gray-500 text-white inline-block w-full h-full p-1.5 font-medium opacity-75'>
-                  {vote_count ? kFormatter(vote_count) : 'N/A'}
-                </span>
+                      }>
+                      {vote_average + '/10' || 'N/A'}
+                    </span>
+                    <span
+                      title="Number of votes"
+                      className='bg-gray-500 text-white inline-block w-full h-full p-1.5 font-medium opacity-75'>
+                      {vote_count ? kFormatter(vote_count) : 'N/A'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <span title={popularityInfo} className='font-semibold inline-block w-full'> Popularity </span>
+                  <span title={popularityInfo} className='border border-slate-500 w-full h-full pt-1.5'> {popularity && Math.floor(popularity)} </span>
+                </div>
+              </div>
+
+              <div className="flex-grow mt-3 ">
+                <p className="text-xl text-gray-100">{overview || 'No overview'}</p>
               </div>
             </div>
-
-            <div className="flex flex-col">
-              <span title={popularityInfo} className='font-semibold inline-block w-full'> Popularity </span>
-              <span title={popularityInfo} className='border border-slate-500 w-full h-full pt-1.5'> {popularity && Math.floor(popularity)} </span>
-            </div>
           </div>
-
-          <div className="flex-grow mt-3 ">
-            <p className="text-xl text-gray-100">{overview || 'No overview'}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        </div>}
+    </>
   );
 }
 
