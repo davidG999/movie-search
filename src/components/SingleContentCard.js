@@ -7,7 +7,7 @@ import { p_300 } from '../assets/TMDB/posterSizes';
 const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }) => {
   const [underline, setUnderline] = useState('');
 
-  const ratingBg = `bg-${vote_average >= 7 ? 'green' : vote_average >= 5 ? 'orange' : vote_average >= 0.1 ? 'red' : 'blue'}-600`
+  const ratingBg = vote_average >= 7 ? 'bg-green-600' : vote_average >= 5 ? 'bg-orange-600' : vote_average >= 0.1 ? 'bg-red-600' : 'bg-blue-600'
 
   const displayTitle = () => {
     return title.length > 30 ?
@@ -26,9 +26,7 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
       <div className="relative bg-movie-card w-50 hover:bg-gray-600 hover:shadow-xl duration-100 rounded-t-lg rounded">
         <span
           title={!vote_average ? 'Information not available' : null}
-          className={
-            `absolute inline-block w-8 h-7 font-medium rounded-full text-center p-1 -m-3 ${ratingBg}`
-          }>
+          className={`absolute inline-block ${ratingBg === 'bg-blue-600' ? 'w-10' : 'w-8'} h-7 font-medium text-lg rounded-full text-center pb-1 px-1 -m-3 ${ratingBg}`}>
           {vote_average || 'N/A'}
         </span>
         <Link to={'/' + id + media_type[0]}>

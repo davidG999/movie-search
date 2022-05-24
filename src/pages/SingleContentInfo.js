@@ -52,7 +52,7 @@ const SingleContentInfo = () => {
     return minutesToHours(runtime)
   }
 
-  const ratingBg = `bg-${vote_average >= 7 ? 'green' : vote_average >= 5 ? 'orange' : vote_average >= 0.1 ? 'red' : 'blue'}-600`
+  const ratingBg = vote_average >= 7 ? 'bg-green-600' : vote_average >= 5 ? 'bg-orange-600' : vote_average >= 0.1 ? 'bg-red-600' : 'bg-blue-600 w-10'
 
   function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
