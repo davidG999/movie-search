@@ -12,6 +12,7 @@ const SingleContentInfo = () => {
   const { id } = useParams()
   const [content, setContent] = useState({});
   const [contentRatings, setContentRatings] = useState();
+  const [credits, setCredits] = useState();
   const [notFound, setNotFound] = useState(false);
   const media_type = id.slice(-1) === 't' ? 'tv' : 'movie'
 
@@ -31,6 +32,16 @@ const SingleContentInfo = () => {
     )
 
     data.results[0] && setContentRatings(data.results[0].rating)
+  }
+
+  const fetchCredits = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${media_type}/${id.slice(0, -1)}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    );
+
+    // console.log(data.cast)
+    if (data.cast.length > 10) data.cast.length = 10
+    data && setCredits(data.cast)
   }
 
   const {
@@ -74,6 +85,7 @@ const SingleContentInfo = () => {
   useEffect(() => {
     fetchSingleContentInfo()
     id.slice(-1) === 't' && fetchTvContentRatings()
+    fetchCredits()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -89,7 +101,7 @@ const SingleContentInfo = () => {
               <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded" alt='Poster' />
             </div>
 
-            <div className={`flex-col flex-grow px-6 `}>
+            <div className="flex-col flex-grow px-6">
 
               <div className="flex justify-between mb-4">
                 <div className="flex text-center">
@@ -134,10 +146,26 @@ const SingleContentInfo = () => {
                 </div>
               </div>
 
-              <div className="flex-grow mt-3 ">
+              <div className="flex-grow">
                 <p className="text-xl text-gray-100">{overview || 'No overview'}</p>
               </div>
+
             </div>
+          </div>
+
+          <div className='flex w-full rounded overflow-hidden shadow-2xl m-4 justify-between'>
+            {credits?.map((c) => (
+              <div key={c.id} className="rounded-lg bg-movie-card mr-2">
+                <img className="w-full object-fill rounded-t-lg" src={c.profile_path ? p_300 + c.profile_path : posterUnavailable} alt="Profile" />
+
+                <div className="p-1 text-center font-medium" >
+                  {c.name}
+                </div>
+                <div className="p-1 opacity-80">
+                  {c.character}
+                </div>
+              </div>
+            ))}
           </div>
         </div>}
     </>
