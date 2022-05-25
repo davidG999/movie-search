@@ -44,17 +44,18 @@ const SingleContentInfo = () => {
   }
     = content;
 
-  const checkForRuntime = () => {
-    if (episode_run_time?.length === 0) return ''
-    if (episode_run_time?.length === 1) return episode_run_time + 'm'
-    if (episode_run_time?.length > 1) {
-      episode_run_time.sort((a, b) => a - b)
-      return episode_run_time[0] + '-' + episode_run_time.slice(-1) + 'm'
+  const checkEpisodeRuntime = () => {
+    if (episode_run_time) {
+      if (episode_run_time?.length === 0) return 'N/A'
+      if (episode_run_time?.length === 1) return episode_run_time + 'm'
+      if (episode_run_time?.length > 1) {
+        episode_run_time.sort((a, b) => a - b)
+        return episode_run_time[0] + '-' + episode_run_time.slice(-1) + 'm'
+      }
     }
-    return minutesToHours(runtime)
   }
 
-  const ratingBg = vote_average >= 7 ? 'bg-green-600' : vote_average >= 5 ? 'bg-orange-600' : vote_average >= 0.1 ? 'bg-red-600' : 'bg-blue-600 w-10'
+  const ratingBg = vote_average >= 7 ? 'bg-green-600' : vote_average >= 5 ? 'bg-orange-600' : vote_average >= 0.1 ? 'bg-red-600' : 'bg-blue-600'
 
   function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
@@ -80,14 +81,15 @@ const SingleContentInfo = () => {
     <>
       {notFound ||
         <div className="flex flex-wrap">
-          <div className="w-full rounded overflow-hidden shadow-lg m-4 flex justify-between">
+          <h3 className="font-bold text-5xl text-gray-200 mb-4 text-center my-4 mx-auto"> {title || name} </h3>
+
+          <div className="w-full rounded overflow-hidden shadow-2xl m-4 flex justify-between">
 
             <div className="md:flex-shrink-0">
               <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded" alt='Poster' />
             </div>
 
-            <div className="flex-col flex-grow px-6 bg-color-333">
-              <h3 className="font-bold text-5xl text-gray-200 mb-4"> {title || name} </h3>
+            <div className={`flex-col flex-grow px-6 `}>
 
               <div className="flex justify-between mb-4">
                 <div className="flex text-center">
@@ -97,7 +99,7 @@ const SingleContentInfo = () => {
                   </div>
                   <div className="flex flex-col mr-6">
                     <span className='font-semibold inline-block w-full'> Runtime </span>
-                    <span className='inline-block w-full border border-slate-500 p-1.5'> {checkForRuntime() || 'N/A'} </span>
+                    <span className='inline-block w-full border border-slate-500 p-1.5'> {episode_run_time ? checkEpisodeRuntime() : runtime ? minutesToHours(runtime) : 'N/A'} </span>
                   </div>
                   {contentRatings &&
                     <div className="flex flex-col mr-6">
@@ -113,14 +115,14 @@ const SingleContentInfo = () => {
                   <div className="flex">
                     <span
                       title={!vote_average ? 'Information not available' : null}
-                      className={`text-white inline-block w-full h-full p-1.5 font-bold text-md
+                      className={`text-white inline-block w-full p-1.5 font-bold text-md
                       ${ratingBg}`
                       }>
-                      {vote_average + '/10' || 'N/A'}
+                      {vote_average ? vote_average + '/10' : 'N/A'}
                     </span>
                     <span
                       title="Number of votes"
-                      className='bg-gray-500 text-white inline-block w-full h-full p-1.5 font-medium opacity-75'>
+                      className='bg-gray-500 text-white inline-block w-full p-1.5 font-medium opacity-75'>
                       {vote_count ? kFormatter(vote_count) : 'N/A'}
                     </span>
                   </div>
