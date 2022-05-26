@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { p_300 } from '../assets/TMDB/posterSizes';
+import { p_300, p_500 } from '../assets/TMDB/posterSizes';
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
+import noPicture from '../assets/TMDB/no-picture.jpg'
 
 import convertDate from '../utils/convertDate';
 import minutesToHours from './../utils/minutesToHours';
@@ -153,14 +154,18 @@ const SingleContentInfo = () => {
             </div>
           </div>
 
-          <div className='flex w-full rounded overflow-hidden shadow-2xl m-4 justify-between'>
+          <div className='flex rounded shadow-2xl m-4 grow-0 pb-20 overflow-x-visible'>
             {credits?.map((c) => (
-              <div key={c.id} className="rounded-lg bg-movie-card mr-2">
-                <img className="w-full object-fill rounded-t-lg" src={c.profile_path ? p_300 + c.profile_path : posterUnavailable} alt="Profile" />
+              <div key={c.id} className="rounded-lg bg-movie-card mr-2 grow-0 w-150">
+                <img
+                  className={`w-150 h-200 rounded-t-lg`}
+                  src={c.profile_path ? p_500 + c.profile_path : noPicture} alt="Profile"
+                />
 
-                <div className="p-1 text-center font-medium" >
+                <div className="p-1 text-center font-medium">
                   {c.name}
                 </div>
+
                 <div className="p-1 opacity-80">
                   {c.character}
                 </div>
