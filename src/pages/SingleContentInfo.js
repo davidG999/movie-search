@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { p_300, p_500 } from '../assets/TMDB/posterSizes';
+import { p_154, p_300, p_500 } from '../assets/TMDB/posterSizes';
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
 import noPicture from '../assets/TMDB/no-picture.jpg'
 
@@ -47,6 +47,7 @@ const SingleContentInfo = () => {
 
   const {
     title, name,
+    genres,
     vote_average, vote_count,
     first_air_date, release_date,
     runtime, episode_run_time,
@@ -102,29 +103,46 @@ const SingleContentInfo = () => {
               <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded" alt='Poster' />
             </div>
 
-            <div className="flex-col flex-grow px-6">
+            <div className="flex-col flex-grow px-6 py-2">
 
               <div className="flex justify-between mb-4">
                 <div className="flex text-center">
-                  <div className="flex flex-col mr-6">
-                    <span className='font-semibold inline-block w-full'> Date </span>
+                  <div className="flex-col mr-6">
+                    <span className='font-semibold text-xl inline-block w-full'> Date </span>
                     <span className='inline-block w-full border border-slate-500 p-1.5'> {first_air_date || release_date ? convertDate(first_air_date || release_date) : 'N/A'} </span>
                   </div>
-                  <div className="flex flex-col mr-6">
-                    <span className='font-semibold inline-block w-full'> Runtime </span>
+                  <div className="flex-col mr-6">
+                    <span className='font-semibold text-xl inline-block w-full'> Runtime </span>
                     <span className='inline-block w-full border border-slate-500 p-1.5'> {episode_run_time ? checkEpisodeRuntime() : runtime ? minutesToHours(runtime) : 'N/A'} </span>
                   </div>
                   {contentRatings &&
-                    <div className="flex flex-col mr-6">
-                      <span className='font-semibold inline-block w-full'> Content rating </span>
+                    <div className="flex-col mr-6">
+                      <span className='font-semibold text-xl inline-block w-full'> Content rating </span>
                       <span className='inline-block w-full border border-slate-500 p-1.5'> {contentRatings} </span>
                     </div>}
                 </div>
               </div>
 
+              <div className="flex justify-between mb-4">
+                <div className="flex text-center">
+                  <div className="flex-col">
+                    <span className='font-semibold text-xl inline-block w-full'> Genres </span>
+                    <div className="flex">
+                      {genres?.map(g => (
+                        <span
+                        key={g.id}
+                          className='last:mr-0 mr-3 px-2 py-1 rounded-full font-semibold text-sm flex align-center w-max bg-gray-600 text-gray-300'>
+                          {g.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="flex text-center mb-4">
                 <div className="flex-col mr-6">
-                  <span className='font-semibold inline-block w-full'> TMDb rating </span>
+                  <span className='font-semibold text-xl inline-block w-full'> TMDb rating </span>
                   <div className="flex">
                     <span
                       title={!vote_average ? 'Information not available' : null}
@@ -142,10 +160,12 @@ const SingleContentInfo = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <span title={popularityInfo} className='font-semibold inline-block w-full'> Popularity </span>
+                  <span title={popularityInfo} className='font-semibold text-xl inline-block w-full'> Popularity </span>
                   <span title={popularityInfo} className='border border-slate-500 w-full h-full pt-1.5'> {popularity && Math.floor(popularity)} </span>
                 </div>
               </div>
+
+              <div className="border border-gray-400 mb-4"></div>
 
               <div className="flex-grow">
                 <p className="text-xl text-gray-100">{overview || 'No overview'}</p>
@@ -154,12 +174,12 @@ const SingleContentInfo = () => {
             </div>
           </div>
 
-          <div className='flex rounded shadow-2xl m-4 grow-0 pb-20 overflow-x-visible'>
+          <div className='flex rounded shadow-2xl m-4 grow-0 pb-20'>
             {credits?.map((c) => (
-              <div key={c.id} className="rounded-lg bg-movie-card mr-2 grow-0 w-150">
+              <div key={c.id} className="rounded-lg bg-movie-card mr-2 last:mr-0">
                 <img
-                  className={`w-150 h-200 rounded-t-lg`}
-                  src={c.profile_path ? p_500 + c.profile_path : noPicture} alt="Profile"
+                  className={`w-full rounded-t-lg ${!c.profile_path && 'w-200'}`}
+                  src={c.profile_path ? `${credits.length > 5 ? p_500 : p_154}` + c.profile_path : noPicture} alt="Profile"
                 />
 
                 <div className="p-1 text-center font-medium">
