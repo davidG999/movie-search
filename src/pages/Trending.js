@@ -25,9 +25,9 @@ const Trending = () => {
 
   return (
     <div className="">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold tracking-wider p-1 pb-3 transition duration-500 ease-out">Trending</h2>
+      <h2 className="text-slate-300 text-center uppercase font-extrabold tracking-wider p-1 text-3xl transition duration-500 ease-out"> Trending </h2>
 
-      <ul className="p-1 m-3 flex justify-center text-center font-semibold text-gray-100 select-none">
+      <ul className="p-1 my-3 flex justify-center text-center font-semibold text-gray-100 select-none">
         <li
           onClick={() => {
             setTime('day');

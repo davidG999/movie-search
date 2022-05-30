@@ -95,9 +95,9 @@ const SingleContentInfo = () => {
     <>
       {notFound ||
         <div className="flex flex-wrap">
-          <h3 className="font-bold text-5xl text-gray-200 mb-4 text-center my-4 mx-auto"> {title || name} </h3>
+          <h3 className="font-bold text-5xl text-gray-200 mb-4 text-center my-3 mx-auto"> {title || name} </h3>
 
-          <div className="w-full rounded overflow-hidden shadow-2xl m-4 flex justify-between">
+          <div className="w-full rounded overflow-hidden shadow-2xl mx-4 flex justify-between">
 
             <div className="md:flex-shrink-0">
               <img src={poster_path ? `${p_300}${poster_path}` : posterUnavailable} className="rounded" alt='Poster' />
@@ -124,13 +124,12 @@ const SingleContentInfo = () => {
               </div>
 
               <div className="flex justify-between mb-4">
-                <div className="flex text-center">
+                <div className="flex">
                   <div className="flex-col">
-                    <span className='font-semibold text-xl inline-block w-full'> Genres </span>
                     <div className="flex">
                       {genres?.map(g => (
                         <span
-                        key={g.id}
+                          key={g.id}
                           className='last:mr-0 mr-3 px-2 py-1 rounded-full font-semibold text-sm flex align-center w-max bg-gray-600 text-gray-300'>
                           {g.name}
                         </span>
@@ -186,8 +185,8 @@ const SingleContentInfo = () => {
                   {c.name}
                 </div>
 
-                <div className="p-1 opacity-80">
-                  {c.character}
+                <div className="p-2 opacity-80">
+                  as {c.character}
                 </div>
               </div>
             ))}

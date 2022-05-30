@@ -29,7 +29,7 @@ const Movies = () => {
 
   return (
     <div className="">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 tracking-wider">Movies</h2>
+      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">Movies</h2>
 
       <Genres
         type="movie"

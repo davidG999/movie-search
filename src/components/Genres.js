@@ -59,7 +59,7 @@ const Genres = ({
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-center space-x-2 mb-3 mx-32">
+    <div className="flex flex-wrap justify-center space-x-2 my-3 mx-32">
       {selectedGenres.length > 0 &&
         <>
           <span

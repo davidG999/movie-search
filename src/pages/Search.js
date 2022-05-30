@@ -32,9 +32,9 @@ const Search = () => {
 
   return (
     <div className="bg-zinc-800">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 tracking-wider">Search</h2>
+      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">Search</h2>
 
-      <div className="flex justify-center">
+      <div className="flex my-3 justify-center">
         <input
           type="search" placeholder="Search..."
           onChange={(e) => setSearchText(e.target.value)}
