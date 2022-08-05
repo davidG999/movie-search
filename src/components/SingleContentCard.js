@@ -27,7 +27,7 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
         <span
           title={!vote_average ? 'Information not available' : null}
           className={`absolute inline-block ${ratingBg === 'bg-blue-600' ? 'w-10' : 'w-8'} h-7 font-medium text-lg rounded-full text-center pb-1 px-1 -m-3 ${ratingBg}`}>
-          {vote_average || 'N/A'}
+          {vote_average ? vote_average.toFixed(vote_average === 10 ? 0 : 1) : 'N/A'}
         </span>
         <Link to={'/' + id + media_type[0]}>
           <img src={poster ? `${p_300}/${poster}` : posterUnavailable} className="rounded-t" alt='Poster' />

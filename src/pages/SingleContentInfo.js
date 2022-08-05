@@ -86,8 +86,7 @@ const SingleContentInfo = () => {
   • Number of users who added it to their "watchlist" for the day
   • Release date / Next/last episode to air date
   • Number of total votes 
-  • Previous days score
-  `
+  • Previous days score`
 
   useEffect(() => {
     fetchSingleContentInfo()
@@ -151,9 +150,9 @@ const SingleContentInfo = () => {
                     <span
                       title={!vote_average ? 'Information not available' : null}
                       className={`text-white inline-block w-full p-1.5 font-bold text-md
-                      ${ratingBg}`
+                        ${ratingBg}`
                       }>
-                      {vote_average ? vote_average + '/10' : 'N/A'}
+                      {vote_average ? vote_average.toFixed(vote_average === 10 ? 0 : 1) + '/10' : 'N/A'}
                     </span>
                     <span
                       title="Number of votes"
