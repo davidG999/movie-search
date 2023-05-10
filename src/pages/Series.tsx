@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import SingleContentCard from '../components/SingleContentCard';
-import Pagination from './../components/Pagination';
-import Genres from './../components/Genres';
-import useGenres from './../hooks/useGenres';
+import Pagination from '../components/Pagination';
+import Genres from '../components/Genres';
+import useGenres from '../hooks/useGenres';
+import { ISingleContent } from './Movies';
 
-const Series = () => {
+const Series: React.FC = () => {
   const [page, setPage] = useState(1);
-  const [series, setSeries] = useState([]);
-  const [numOfPages, setNumOfPages] = useState();
+  const [series, setSeries] = useState<ISingleContent[]>([]);
+  const [numOfPages, setNumOfPages] = useState<number>(0);
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const urlGenres = useGenres(selectedGenres);
@@ -58,7 +59,6 @@ const Series = () => {
       </div>
 
       {numOfPages > 1 && <Pagination setPage={setPage} numOfPages={numOfPages > 10 ? 10 : numOfPages} currentPage={page} />}
-
     </div>
   );
 }

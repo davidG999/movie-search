@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import SingleContentCard from "../components/SingleContentCard";
 import axios from "axios";
-import Pagination from './../components/Pagination';
+import Pagination from '../components/Pagination';
+import { ISingleContent } from "./Movies";
 
-const Trending = () => {
-  const [page, setPage] = useState(1);
-  const [numOfPages, setNumOfPages] = useState();
-  const [content, setContent] = useState([]);
+const Trending: React.FC = () => {
+  const [page, setPage] = useState<number>(1);
+  const [numOfPages, setNumOfPages] = useState<number>(0);
+  const [content, setContent] = useState<ISingleContent[]>([]);
   const [time, setTime] = useState('day');
 
   const fetchTrending = async () => {
@@ -51,7 +52,6 @@ const Trending = () => {
           return (
             <SingleContentCard
               key={c.id}
-
               id={c.id}
               poster={c.poster_path}
               title={c.title || c.name}

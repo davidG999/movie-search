@@ -1,16 +1,32 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import SingleContentCard from './../components/SingleContentCard';
-import Pagination from './../components/Pagination';
-import Genres from './../components/Genres';
-import useGenres from './../hooks/useGenres';
+import SingleContentCard from '../components/SingleContentCard';
+import Pagination from '../components/Pagination';
+import Genres from '../components/Genres';
+import useGenres from '../hooks/useGenres';
 
-const Movies = () => {
+export interface ISingleContent {
+  id: number;
+  poster_path?: string;
+  title?: string;
+  name?: string;
+  release_date?: string;
+  first_air_date?: string;
+  vote_average?: number;
+  vote_count?: number;
+  popularity?: number;
+  poster?: string;
+  media_type?: string;
+  date?: string;
+}
+
+const Movies: React.FC = () => {
   const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState([]);
-  const [numOfPages, setNumOfPages] = useState();
+  const [movies, setMovies] = useState<ISingleContent[]>([]);
+  const [numOfPages, setNumOfPages] = useState<number>(0);
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
+
   const urlGenres = useGenres(selectedGenres);
 
   const fetchMovies = async () => {
@@ -45,7 +61,6 @@ const Movies = () => {
           return (
             <SingleContentCard
               key={m.id}
-
               id={m.id}
               poster={m.poster_path}
               title={m.title || m.name}

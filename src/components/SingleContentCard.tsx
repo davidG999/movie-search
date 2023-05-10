@@ -3,18 +3,10 @@ import { Link } from 'react-router-dom';
 
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
 import { p_300 } from '../assets/TMDB/posterSizes';
+import { ISingleContent } from '../pages/Movies';
 
-type SingleContentCardProps = {
-  id: number;
-  poster: string;
-  title: string;
-  date: string;
-  media_type: string;
-  vote_average: number;
-}
-
-const SingleContentCard: React.FC<SingleContentCardProps> = ({ id, poster, title, date, media_type, vote_average }) => {
-  const [underline, setUnderline] = useState('');
+const SingleContentCard: React.FC<ISingleContent> = ({ id, poster, title = "", date, media_type = "", vote_average = 0 }) => {
+  const [underline, setUnderline] = useState<string>('');
 
   const ratingBg = vote_average >= 7 ? 'bg-green-600' : vote_average >= 5 ? 'bg-orange-600' : vote_average >= 0.1 ? 'bg-red-600' : 'bg-blue-600'
 

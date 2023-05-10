@@ -22,6 +22,6 @@
   },
   "include": [
     "src",
-    "src/custom.d.ts"
-  ]
+  ],
+  "files": ["src/global.d.ts"]
 }

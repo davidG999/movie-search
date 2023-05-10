@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Pagination from './../components/Pagination';
-import SingleContentCard from './../components/SingleContentCard';
+import Pagination from '../components/Pagination';
+import SingleContentCard from '../components/SingleContentCard';
+import { ISingleContent } from './Movies';
 
-const Search = () => {
+const Search: React.FC = () => {
   const [type, setType] = useState(0);
-  const [searchText, setSearchText] = useState("megamind");
+  const [searchText, setSearchText] = useState("Megamind");
   const [page, setPage] = useState(1);
-  const [content, setContent] = useState([]);
-  const [numOfPages, setNumOfPages] = useState();
+  const [content, setContent] = useState<ISingleContent[]>([]);
+  const [numOfPages, setNumOfPages] = useState<number>(0);
 
   const fetchSearch = async () => {
     try {
@@ -66,7 +67,6 @@ const Search = () => {
         {content?.map((c) => (
           <SingleContentCard
             key={c.id}
-
             id={c.id}
             poster={c.poster_path}
             title={c.title || c.name}
