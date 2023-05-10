@@ -1,13 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: #27272a;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  scroll-behavior: smooth;
+}
+
+.layout {
+  @apply flex flex-wrap justify-evenly max-w-screen-lg my-0 mx-auto h-full 2xl:grid 2xl:grid-cols-4 2xl:place-items-stretch gap-9
 }

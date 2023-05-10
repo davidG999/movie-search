@@ -1,4 +1,4 @@
-export default function convertDate(date) {
+export default function convertDate(date: any): string {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   let temp_date = date.split("-")
