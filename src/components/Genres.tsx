@@ -2,7 +2,13 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import removeIcon from '../assets/icons/remove.svg'
 
-const GenreChip = ({ genreTitle, handleClick, isActive }) => {
+type GenreChipProps = {
+  genreTitle: string;
+  handleClick: any;
+  isActive?: boolean;
+}
+
+const GenreChip: React.FC<GenreChipProps> = ({ genreTitle, handleClick, isActive }) => {
   return (
     <span
       onClick={handleClick}
@@ -17,7 +23,21 @@ const GenreChip = ({ genreTitle, handleClick, isActive }) => {
   );
 }
 
-const Genres = ({
+export interface IGenre {
+  id: number;
+  name: string;
+}
+
+type GenresProps = {
+  type: string;
+  genres: IGenre[];
+  selectedGenres: IGenre[];
+  setGenres: any;
+  setSelectedGenres: any;
+  setPage: any;
+}
+
+const Genres: React.FC<GenresProps> = ({
   type,
   genres,
   selectedGenres,
@@ -26,13 +46,13 @@ const Genres = ({
   setPage,
 }) => {
 
-  const handleAdd = (genre) => {
+  const handleAdd = (genre: IGenre) => {
     setSelectedGenres([...selectedGenres, genre]);
     setGenres(genres.filter((g) => g.id !== genre.id));
     setPage(1);
   }
 
-  const handleRemove = (genre) => {
+  const handleRemove = (genre: IGenre) => {
     setSelectedGenres(
       selectedGenres.filter((selected) => selected.id !== genre.id)
     );

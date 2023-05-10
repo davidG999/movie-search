@@ -14,7 +14,7 @@ import Search from './pages/Search';
 import NotFound from './pages/NotFound';
 import SingleContentInfo from './pages/SingleContentInfo';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="text-gray-300 bg-zinc-800 selection:bg-slate-700 selection:text-cyan-400">
       <BrowserRouter>

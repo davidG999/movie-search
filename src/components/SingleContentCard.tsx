@@ -4,7 +4,16 @@ import { Link } from 'react-router-dom';
 import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
 import { p_300 } from '../assets/TMDB/posterSizes';
 
-const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }) => {
+type SingleContentCardProps = {
+  id: number;
+  poster: string;
+  title: string;
+  date: string;
+  media_type: string;
+  vote_average: number;
+}
+
+const SingleContentCard: React.FC<SingleContentCardProps> = ({ id, poster, title, date, media_type, vote_average }) => {
   const [underline, setUnderline] = useState('');
 
   const ratingBg = vote_average >= 7 ? 'bg-green-600' : vote_average >= 5 ? 'bg-orange-600' : vote_average >= 0.1 ? 'bg-red-600' : 'bg-blue-600'
@@ -25,7 +34,7 @@ const SingleContentCard = ({ id, poster, title, date, media_type, vote_average }
     <div className="flex m-3 text-slate-100">
       <div className="relative bg-movie-card w-50 hover:bg-gray-600 hover:shadow-xl duration-100 rounded-t-lg rounded">
         <span
-          title={!vote_average ? 'Information not available' : null}
+          title={!vote_average ? 'Information not available' : undefined}
           className={`absolute inline-block ${ratingBg === 'bg-blue-600' ? 'w-10' : 'w-8'} h-7 font-medium text-lg rounded-full text-center pb-1 px-1 -m-3 ${ratingBg}`}>
           {vote_average ? vote_average.toFixed(vote_average === 10 ? 0 : 1) : 'N/A'}
         </span>
