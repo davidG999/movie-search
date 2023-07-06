@@ -1,36 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react"
 
-import axios from 'axios';
+import axios from "axios"
 
-import useGenres from '../hooks/useGenres';
+import useGenres from "../hooks/useGenres"
 
-import Genres from '../components/Genres';
-import Pagination from '../components/Pagination';
-import SingleContentCard from '../components/SingleContentCard';
+import Genres from "../components/genre/Genres"
+import Pagination from "../components/pagination/Pagination"
+import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
 export interface ISingleContent {
-  id: number;
-  poster_path?: string;
-  title?: string;
-  name?: string;
-  release_date?: string;
-  first_air_date?: string;
-  vote_average?: number;
-  vote_count?: number;
-  popularity?: number;
-  poster?: string;
-  media_type?: string;
-  date?: string;
+  id: number
+  poster_path?: string
+  title?: string
+  name?: string
+  release_date?: string
+  first_air_date?: string
+  vote_average?: number
+  vote_count?: number
+  popularity?: number
+  poster?: string
+  media_type?: string
+  date?: string
 }
 
 const Movies: React.FC = () => {
-  const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState<ISingleContent[]>([]);
-  const [numOfPages, setNumOfPages] = useState<number>(0);
-  const [genres, setGenres] = useState([]);
-  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [page, setPage] = useState(1)
+  const [movies, setMovies] = useState<ISingleContent[]>([])
+  const [numOfPages, setNumOfPages] = useState<number>(0)
+  const [genres, setGenres] = useState([])
+  const [selectedGenres, setSelectedGenres] = useState([])
 
-  const urlGenres = useGenres(selectedGenres);
+  const urlGenres = useGenres(selectedGenres)
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
@@ -44,11 +44,13 @@ const Movies: React.FC = () => {
   useEffect(() => {
     fetchMovies()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, urlGenres]);
+  }, [page, urlGenres])
 
   return (
     <div className="">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">Movies</h2>
+      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">
+        Movies
+      </h2>
 
       <Genres
         type="movie"
@@ -68,16 +70,22 @@ const Movies: React.FC = () => {
               poster={m.poster_path}
               title={m.title || m.name}
               date={m.release_date || m.first_air_date}
-              media_type='movie'
+              media_type="movie"
               vote_average={m.vote_average}
             />
           )
         })}
       </div>
 
-      {numOfPages > 1 && <Pagination setPage={setPage} numOfPages={numOfPages > 10 ? 10 : numOfPages} currentPage={page} />}
+      {numOfPages > 1 && (
+        <Pagination
+          setPage={setPage}
+          numOfPages={numOfPages > 10 ? 10 : numOfPages}
+          currentPage={page}
+        />
+      )}
     </div>
-  );
+  )
 }
 
-export default Movies;
+export default Movies

@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react"
 
-import axios from 'axios';
+import axios from "axios"
 
-import useGenres from '../hooks/useGenres';
+import useGenres from "../hooks/useGenres"
 
-import Genres from '../components/Genres';
-import Pagination from '../components/Pagination';
-import SingleContentCard from '../components/SingleContentCard';
+import Genres from "../components/genre/Genres"
+import Pagination from "../components/pagination/Pagination"
+import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from './Movies';
+import { ISingleContent } from "./Movies"
 
 const Series: React.FC = () => {
-  const [page, setPage] = useState(1);
-  const [series, setSeries] = useState<ISingleContent[]>([]);
-  const [numOfPages, setNumOfPages] = useState<number>(0);
-  const [genres, setGenres] = useState([]);
-  const [selectedGenres, setSelectedGenres] = useState([]);
-  const urlGenres = useGenres(selectedGenres);
+  const [page, setPage] = useState(1)
+  const [series, setSeries] = useState<ISingleContent[]>([])
+  const [numOfPages, setNumOfPages] = useState<number>(0)
+  const [genres, setGenres] = useState([])
+  const [selectedGenres, setSelectedGenres] = useState([])
+  const urlGenres = useGenres(selectedGenres)
 
   const fetchSeries = async () => {
     const { data } = await axios.get(
@@ -30,11 +30,13 @@ const Series: React.FC = () => {
   useEffect(() => {
     fetchSeries()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, urlGenres]);
+  }, [page, urlGenres])
 
   return (
     <div className="bg-zinc-800">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">TV Series</h2>
+      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">
+        TV Series
+      </h2>
 
       <Genres
         type="tv"
@@ -50,21 +52,26 @@ const Series: React.FC = () => {
           return (
             <SingleContentCard
               key={m.id}
-
               id={m.id}
               poster={m.poster_path}
               title={m.title || m.name}
               date={m.release_date || m.first_air_date}
-              media_type='tv'
+              media_type="tv"
               vote_average={m.vote_average}
             />
           )
         })}
       </div>
 
-      {numOfPages > 1 && <Pagination setPage={setPage} numOfPages={numOfPages > 10 ? 10 : numOfPages} currentPage={page} />}
+      {numOfPages > 1 && (
+        <Pagination
+          setPage={setPage}
+          numOfPages={numOfPages > 10 ? 10 : numOfPages}
+          currentPage={page}
+        />
+      )}
     </div>
-  );
+  )
 }
 
-export default Series;
+export default Series

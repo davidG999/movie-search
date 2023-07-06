@@ -6,7 +6,7 @@ import Series from './pages/Series';
 import Search from './pages/Search';
 import NotFound from './pages/NotFound';
 import SingleContentInfo from './pages/SingleContentInfo';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar/Navbar';
 
 import './index.css';
 

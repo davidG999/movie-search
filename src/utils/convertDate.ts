@@ -1,7 +1,22 @@
-export default function convertDate(date: any): string {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const convertDate = (date: any): string => {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ]
 
   let temp_date = date.split("-")
 
   return `${months[Number(temp_date[1]) - 1]} ${temp_date[2]}, ${temp_date[0]}`
 }
+
+export default convertDate

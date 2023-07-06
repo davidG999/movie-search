@@ -1,10 +1,11 @@
-import { IGenre } from "../components/Genres";
+import { IGenre } from "../components/genre/Genres"
 
 const useGenres = (selectedGenres: IGenre[]): string => {
-  if (selectedGenres.length < 1) return '';
+  if (selectedGenres.length < 1) return ""
 
-  const genreIds = selectedGenres.map(g => g.id);
-  return genreIds.reduce((acc, curr) => acc + ',' + curr.toString(), '');
+  const genreIds: number[] = selectedGenres.map((g) => g.id)
+
+  return genreIds.reduce((acc, curr) => acc + "," + curr.toString(), "")
 }
 
-export default useGenres;
+export default useGenres
