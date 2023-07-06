@@ -1,4 +1,4 @@
-import removeIcon from "../assets/icons/remove.svg"
+import removeIcon from "../../assets/icons/remove.svg"
 
 type GenreChipProps = {
   genreTitle: string

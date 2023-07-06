@@ -5,7 +5,7 @@ import axios from "axios"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from "./Movies"
+import { ISingleContent } from "../../interfaces"
 
 const Search: React.FC = () => {
   const [type, setType] = useState(0)

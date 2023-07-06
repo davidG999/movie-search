@@ -8,7 +8,7 @@ import Genres from "../components/genre/Genres"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from "./Movies"
+import { ISingleContent } from "../../interfaces"
 
 const Series: React.FC = () => {
   const [page, setPage] = useState(1)

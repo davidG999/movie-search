@@ -1,10 +1,10 @@
 import NavItem from "./NavItem"
 
-import trendingIcon from "../assets/icons/trendingIcon.svg"
-import movieIcon from "../assets/icons/movieIcon.svg"
-import tvIcon from "../assets/icons/tvIcon.svg"
-import searchIcon from "../assets/icons/searchIcon.svg"
-import tmdbLogo from "../assets/TMDB/tmdb-logo.svg"
+import trendingIcon from "../../assets/icons/trendingIcon.svg"
+import movieIcon from "../../assets/icons/movieIcon.svg"
+import tvIcon from "../../assets/icons/tvIcon.svg"
+import searchIcon from "../../assets/icons/searchIcon.svg"
+import tmdbLogo from "../../assets/TMDB/tmdb-logo.svg"
 
 const Navbar: React.FC = () => {
   return (

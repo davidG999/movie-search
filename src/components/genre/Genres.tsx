@@ -4,12 +4,9 @@ import axios from "axios"
 
 import GenreChip from "./GenreChip"
 
-import removeIcon from "../assets/icons/remove.svg"
+import removeIcon from "../../assets/icons/remove.svg"
 
-export interface IGenre {
-  id: number
-  name: string
-}
+import { IGenre } from './../../../interfaces';
 
 type GenresProps = {
   type: string

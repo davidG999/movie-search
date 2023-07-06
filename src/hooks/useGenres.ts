@@ -1,4 +1,4 @@
-import { IGenre } from "../components/genre/Genres"
+import { IGenre } from "../../interfaces"
 
 const useGenres = (selectedGenres: IGenre[]): string => {
   if (selectedGenres.length < 1) return ""

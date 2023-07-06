@@ -8,20 +8,7 @@ import Genres from "../components/genre/Genres"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-export interface ISingleContent {
-  id: number
-  poster_path?: string
-  title?: string
-  name?: string
-  release_date?: string
-  first_air_date?: string
-  vote_average?: number
-  vote_count?: number
-  popularity?: number
-  poster?: string
-  media_type?: string
-  date?: string
-}
+import { ISingleContent } from "../../interfaces"
 
 const Movies: React.FC = () => {
   const [page, setPage] = useState(1)

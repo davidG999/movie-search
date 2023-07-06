@@ -2,9 +2,9 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 import { p_300 } from "../../assets/TMDB/posterSizes"
-import posterUnavailable from "../assets/TMDB/poster-unavailbable.jpg"
+import posterUnavailable from "../../assets/TMDB/poster-unavailbable.jpg"
 
-import { ISingleContent } from "../../pages/Movies"
+import { ISingleContent } from "../../../interfaces"
 
 const SingleContentCard: React.FC<ISingleContent> = ({
   id,

@@ -12,23 +12,22 @@ import noPicture from "../assets/TMDB/no-picture.jpg"
 import { p_154, p_300, p_500 } from "../assets/TMDB/posterSizes"
 import posterUnavailable from "../assets/TMDB/poster-unavailbable.jpg"
 
-import { ISingleContent } from "./Movies"
-import { IGenre } from "../components/genre/Genres"
-
-export interface ISingleContentInfo extends ISingleContent {
-  vote_count: number
-  genres: IGenre[]
-  runtime: string
-  overview: string
-  episode_run_time: any
-  popularity: number
-}
+import { IGenre, ISingleContent } from "../../interfaces"
 
 type Credits = {
   id: number
   profile_path: string
   name: string
   character: string
+}
+
+interface ISingleContentInfo extends ISingleContent {
+  vote_count: number
+  genres: IGenre[]
+  runtime: string
+  overview: string
+  episode_run_time: any
+  popularity: number
 }
 
 const SingleContentInfo: React.FC = () => {
