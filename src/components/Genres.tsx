@@ -1,5 +1,7 @@
-import axios from 'axios';
 import { useEffect } from 'react';
+
+import axios from 'axios';
+
 import removeIcon from '../assets/icons/remove.svg'
 
 type GenreChipProps = {

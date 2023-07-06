@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
 import { p_300 } from '../assets/TMDB/posterSizes';
+import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
+
 import { ISingleContent } from '../pages/Movies';
 
 const SingleContentCard: React.FC<ISingleContent> = ({ id, poster, title = "", date, media_type = "", vote_average = 0 }) => {

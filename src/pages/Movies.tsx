@@ -1,9 +1,12 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
-import SingleContentCard from '../components/SingleContentCard';
-import Pagination from '../components/Pagination';
-import Genres from '../components/Genres';
+
+import axios from 'axios';
+
 import useGenres from '../hooks/useGenres';
+
+import Genres from '../components/Genres';
+import Pagination from '../components/Pagination';
+import SingleContentCard from '../components/SingleContentCard';
 
 export interface ISingleContent {
   id: number;

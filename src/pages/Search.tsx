@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+
 import axios from 'axios';
+
 import Pagination from '../components/Pagination';
 import SingleContentCard from '../components/SingleContentCard';
+
 import { ISingleContent } from './Movies';
 
 const Search: React.FC = () => {

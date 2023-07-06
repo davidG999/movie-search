@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
+
 import axios from 'axios';
-import { p_154, p_300, p_500 } from '../assets/TMDB/posterSizes';
-import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
-import noPicture from '../assets/TMDB/no-picture.jpg'
 
 import convertDate from '../utils/convertDate';
 import minutesToHours from '../utils/minutesToHours';
+
 import NotFound from './NotFound';
+
+import noPicture from '../assets/TMDB/no-picture.jpg'
+import { p_154, p_300, p_500 } from '../assets/TMDB/posterSizes';
+import posterUnavailable from '../assets/TMDB/poster-unavailbable.jpg'
+
 import { ISingleContent } from './Movies';
 import { IGenre } from '../components/Genres';
 

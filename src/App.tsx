@@ -1,18 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Styles
-import './index.css';
-
-// Components
-import Navbar from './components/Navbar';
-
-// Pages
 import Trending from './pages/Trending';
 import Movies from './pages/Movies';
 import Series from './pages/Series';
 import Search from './pages/Search';
 import NotFound from './pages/NotFound';
 import SingleContentInfo from './pages/SingleContentInfo';
+import Navbar from './components/Navbar';
+
+import './index.css';
 
 const App: React.FC = () => {
   return (

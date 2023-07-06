@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import SingleContentCard from "../components/SingleContentCard";
+
 import axios from "axios";
+
 import Pagination from '../components/Pagination';
+import SingleContentCard from "../components/SingleContentCard";
+
 import { ISingleContent } from "./Movies";
 
 const Trending: React.FC = () => {
