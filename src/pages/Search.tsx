@@ -5,12 +5,12 @@ import axios from "axios"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from "../../interfaces"
+import { ISingleContent } from "../../types"
 
 const Search: React.FC = () => {
-  const [type, setType] = useState(0)
-  const [searchText, setSearchText] = useState("Megamind")
-  const [page, setPage] = useState(1)
+  const [type, setType] = useState<0 | 1>(0)
+  const [searchText, setSearchText] = useState<string>("Megamind")
+  const [page, setPage] = useState<number>(1)
   const [content, setContent] = useState<ISingleContent[]>([])
   const [numOfPages, setNumOfPages] = useState<number>(0)
 
@@ -60,8 +60,7 @@ const Search: React.FC = () => {
           ${!type && "bg-slate-600"}
           `}
         >
-          {" "}
-          Movies{" "}
+          Movies
         </li>
         <li
           onClick={() => {
@@ -72,8 +71,7 @@ const Search: React.FC = () => {
           ${type && "bg-slate-600"}
           `}
         >
-          {" "}
-          TV Series{" "}
+          TV Series
         </li>
       </ul>
 
@@ -90,13 +88,10 @@ const Search: React.FC = () => {
           />
         ))}
       </div>
-      {searchText &&
-        content.length < 1 &&
-        (type ? (
-          <h2 className="text-center">No series found</h2>
-        ) : (
-          <h2 className="text-center">No movies found</h2>
-        ))}
+
+      {searchText && content.length < 1 && (
+        <h2 className="text-center">No {type ? "series" : "movies"} found</h2>
+      )}
 
       {numOfPages > 1 && (
         <Pagination

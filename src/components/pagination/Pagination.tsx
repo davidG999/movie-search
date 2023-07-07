@@ -14,25 +14,12 @@ const Pagination: React.FC<PaginationProps> = ({
   numOfPages = 10,
   currentPage,
 }) => {
+  const leftArrowStyles = currentPage === 1 ? "opacity-30" : ""
+  const rightArrowStyles = currentPage === numOfPages ? "opacity-30" : ""
+
   const handlePageChange = (page: number) => {
     setPage(page)
     window.scroll(0, 0)
-  }
-
-  const generatePages = () => {
-    let pages = []
-
-    for (let i = 0; i < numOfPages; i++) {
-      pages.push(
-        <PageNumberElement
-          number={i + 1}
-          key={i + 1}
-          handlePageChange={handlePageChange}
-        />
-      )
-    }
-
-    return pages.map((e) => e)
   }
 
   return (
@@ -46,16 +33,20 @@ const Pagination: React.FC<PaginationProps> = ({
           src={arrowLeft}
           width={30}
           alt="Previous page"
-          className={`invert border-gray-700 ${
-            currentPage === 1 ? "opacity-30" : ""
-          }`}
+          className={`invert border-gray-700 ${leftArrowStyles}`}
         />
       </button>
 
       <ul
         className={`inline-flex pages:cursor-pointer pages:py-2 pages:px-3 pages:border pages:text-gray-200`}
       >
-        {generatePages()}
+        {Array(numOfPages).map((e, i) => (
+          <PageNumberElement
+            number={i + 1}
+            key={i + 1}
+            handlePageChange={handlePageChange}
+          />
+        ))}
       </ul>
 
       <button
@@ -71,9 +62,7 @@ const Pagination: React.FC<PaginationProps> = ({
           src={arrowRight}
           width={30}
           alt="Next page"
-          className={`invert border-gray-700 ${
-            currentPage === numOfPages ? "opacity-30" : ""
-          }`}
+          className={`invert border-gray-700 ${rightArrowStyles}`}
         />
       </button>
     </div>

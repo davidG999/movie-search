@@ -8,7 +8,7 @@ import Genres from "../components/genre/Genres"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from "../../interfaces"
+import { ISingleContent } from "../../types"
 
 const Series: React.FC = () => {
   const [page, setPage] = useState(1)
@@ -30,7 +30,7 @@ const Series: React.FC = () => {
   useEffect(() => {
     fetchSeries()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, urlGenres])
+  }, [])
 
   return (
     <div className="bg-zinc-800">

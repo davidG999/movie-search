@@ -8,10 +8,12 @@ const NotFound: React.FC = () => {
       </h1>
       <p className="text-center mt-10 mx-5 font-medium text-3xl">
         Maybe this page moved? Got deleted? Never existed in the first place?
-        Let's go{" "}
-        <Link to="/" className="underline text-white">
-          home
-        </Link>{" "}
+        Let's go
+        <span>
+          <Link to="/" className="underline text-white">
+            home
+          </Link>
+        </span>
         and try from there.
       </p>
     </div>

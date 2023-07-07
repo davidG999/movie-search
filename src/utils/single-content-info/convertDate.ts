@@ -14,7 +14,7 @@ const convertDate = (date: any): string => {
     "Dec",
   ]
 
-  let temp_date = date.split("-")
+  const temp_date = date.split("-")
 
   return `${months[Number(temp_date[1]) - 1]} ${temp_date[2]}, ${temp_date[0]}`
 }

@@ -1,7 +1,9 @@
-import { IGenre } from "../../interfaces"
+import { IGenre } from "../../types"
 
 const useGenres = (selectedGenres: IGenre[]): string => {
-  if (selectedGenres.length < 1) return ""
+  if (selectedGenres.length < 1) {
+    return ""
+  }
 
   const genreIds: number[] = selectedGenres.map((g) => g.id)
 

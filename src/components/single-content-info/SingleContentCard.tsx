@@ -1,10 +1,14 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-import { p_300 } from "../../assets/TMDB/posterSizes"
+import { POSTER_SIZE_300 } from "../../api/api"
+
+import getRatingBg from "../../utils/single-content-info/setRatingBg"
+import formatTitle from "../../utils/single-content-info/displayTitle"
+
 import posterUnavailable from "../../assets/TMDB/poster-unavailbable.jpg"
 
-import { ISingleContent } from "../../../interfaces"
+import { ISingleContent } from "../../../types"
 
 const SingleContentCard: React.FC<ISingleContent> = ({
   id,
@@ -16,28 +20,9 @@ const SingleContentCard: React.FC<ISingleContent> = ({
 }) => {
   const [underline, setUnderline] = useState<string>("")
 
-  const ratingBg =
-    vote_average >= 7
-      ? "bg-green-600"
-      : vote_average >= 5
-      ? "bg-orange-600"
-      : vote_average >= 0.1
-      ? "bg-red-600"
-      : "bg-blue-600"
+  const ratingBg = getRatingBg(vote_average)
 
-  const displayTitle = () => {
-    return title.length > 30
-      ? title
-          .split(" ")
-          .splice(0, title.split(" ").length - 2)
-          .join(" ") + "..."
-      : title.length > 25
-      ? title
-          .split(" ")
-          .splice(0, title.split(" ").length - 1)
-          .join(" ") + "..."
-      : title
-  }
+  const formattedTitle = formatTitle(title)
 
   return (
     <div className="flex m-3 text-slate-100">
@@ -54,7 +39,7 @@ const SingleContentCard: React.FC<ISingleContent> = ({
         </span>
         <Link to={"/" + id + media_type[0]}>
           <img
-            src={poster ? `${p_300}/${poster}` : posterUnavailable}
+            src={poster ? `${POSTER_SIZE_300}/${poster}` : posterUnavailable}
             className="rounded-t"
             alt="Poster"
           />
@@ -64,7 +49,7 @@ const SingleContentCard: React.FC<ISingleContent> = ({
             onMouseLeave={() => setUnderline("")}
             title={title}
           >
-            {displayTitle()}
+            {formattedTitle}
           </h2>
         </Link>
 

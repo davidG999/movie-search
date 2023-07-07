@@ -1,3 +1,10 @@
+export type Credits = {
+  id: number
+  profile_path: string
+  name: string
+  character: string
+}
+
 export interface IGenre {
   id: number
   name: string
@@ -16,4 +23,13 @@ export interface ISingleContent {
   poster?: string
   media_type?: string
   date?: string
+}
+
+export interface ISingleContentInfo extends ISingleContent {
+  vote_count: number
+  genres: IGenre[]
+  runtime: string
+  overview: string
+  episode_run_time: any
+  popularity: number
 }

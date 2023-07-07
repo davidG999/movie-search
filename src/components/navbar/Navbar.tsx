@@ -1,5 +1,7 @@
 import NavItem from "./NavItem"
 
+import { TMDB_BASE_URL } from "../../api/api"
+
 import trendingIcon from "../../assets/icons/trendingIcon.svg"
 import movieIcon from "../../assets/icons/movieIcon.svg"
 import tvIcon from "../../assets/icons/tvIcon.svg"
@@ -15,7 +17,7 @@ const Navbar: React.FC = () => {
       <NavItem icon={searchIcon} title="Search" page="/search" />
 
       <div className="absolute bottom-0 right-0 p-1">
-        <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
+        <a href={TMDB_BASE_URL} target="_blank" rel="noreferrer">
           <img src={tmdbLogo} alt="TMDB" width={40} />
         </a>
       </div>

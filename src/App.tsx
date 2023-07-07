@@ -1,14 +1,14 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import Trending from './pages/Trending';
-import Movies from './pages/Movies';
-import Series from './pages/Series';
-import Search from './pages/Search';
-import NotFound from './pages/NotFound';
-import SingleContentInfo from './pages/SingleContentInfo';
-import Navbar from './components/navbar/Navbar';
+import Trending from "./pages/Trending"
+import Movies from "./pages/Movies"
+import Series from "./pages/Series"
+import Search from "./pages/Search"
+import NotFound from "./pages/NotFound"
+import SingleContentInfo from "./pages/single-content-info/SingleContentInfo"
+import Navbar from "./components/navbar/Navbar"
 
-import './index.css';
+import "./index.css"
 
 const App: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ const App: React.FC = () => {
         <Navbar />
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

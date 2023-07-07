@@ -5,7 +5,7 @@ import axios from "axios"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from "../../interfaces"
+import { ISingleContent } from "../../types"
 
 const Trending: React.FC = () => {
   const [page, setPage] = useState<number>(1)
@@ -30,8 +30,7 @@ const Trending: React.FC = () => {
   return (
     <div className="">
       <h2 className="text-slate-300 text-center uppercase font-extrabold tracking-wider p-1 text-3xl transition duration-500 ease-out">
-        {" "}
-        Trending{" "}
+        Trending
       </h2>
 
       <ul className="p-1 my-3 flex justify-center text-center font-semibold text-gray-100 select-none">
@@ -44,8 +43,7 @@ const Trending: React.FC = () => {
           ${time === "day" ? "bg-slate-600" : ""}
           `}
         >
-          {" "}
-          Today{" "}
+          Today
         </li>
         <li
           onClick={() => {
@@ -56,8 +54,7 @@ const Trending: React.FC = () => {
           ${time === "week" ? "bg-slate-600" : ""}
           `}
         >
-          {" "}
-          This week{" "}
+          This week
         </li>
       </ul>
 

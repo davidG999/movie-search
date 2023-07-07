@@ -6,7 +6,7 @@ import GenreChip from "./GenreChip"
 
 import removeIcon from "../../assets/icons/remove.svg"
 
-import { IGenre } from './../../../interfaces';
+import { IGenre } from "../../../types"
 
 type GenresProps = {
   type: string
@@ -40,9 +40,9 @@ const Genres: React.FC<GenresProps> = ({
   }
 
   const fetchGenres = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-    )
+    const genreListUrl = `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+
+    const { data } = await axios.get(genreListUrl)
 
     setGenres(data.genres)
   }
@@ -75,26 +75,22 @@ const Genres: React.FC<GenresProps> = ({
         </>
       )}
 
-      {selectedGenres?.map((genre) => {
-        return (
-          <GenreChip
-            key={genre.id}
-            genreTitle={genre.name}
-            isActive={true}
-            handleClick={() => handleRemove(genre)}
-          />
-        )
-      })}
+      {selectedGenres?.map((genre) => (
+        <GenreChip
+          key={genre.id}
+          genreTitle={genre.name}
+          isActive={true}
+          handleClick={() => handleRemove(genre)}
+        />
+      ))}
 
-      {genres?.map((genre) => {
-        return (
-          <GenreChip
-            key={genre.id}
-            genreTitle={genre.name}
-            handleClick={() => handleAdd(genre)}
-          />
-        )
-      })}
+      {genres?.map((genre) => (
+        <GenreChip
+          key={genre.id}
+          genreTitle={genre.name}
+          handleClick={() => handleAdd(genre)}
+        />
+      ))}
     </div>
   )
 }
