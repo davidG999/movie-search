@@ -8,14 +8,15 @@ import Genres from "../components/genre/Genres"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from "../../types"
+import { IGenre, ISingleContent } from "../../types"
 
 const Series: React.FC = () => {
   const [page, setPage] = useState(1)
   const [series, setSeries] = useState<ISingleContent[]>([])
   const [numOfPages, setNumOfPages] = useState<number>(0)
-  const [genres, setGenres] = useState([])
-  const [selectedGenres, setSelectedGenres] = useState([])
+  const [genres, setGenres] = useState<IGenre[]>([])
+  const [selectedGenres, setSelectedGenres] = useState<IGenre[]>([])
+
   const urlGenres = useGenres(selectedGenres)
 
   const fetchSeries = async () => {
@@ -30,7 +31,7 @@ const Series: React.FC = () => {
   useEffect(() => {
     fetchSeries()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [page, urlGenres])
 
   return (
     <div className="bg-zinc-800">

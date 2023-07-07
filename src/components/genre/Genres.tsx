@@ -12,9 +12,9 @@ type GenresProps = {
   type: string
   genres: IGenre[]
   selectedGenres: IGenre[]
-  setGenres: any
-  setSelectedGenres: any
-  setPage: any
+  setGenres: React.Dispatch<React.SetStateAction<IGenre[]>>
+  setSelectedGenres: React.Dispatch<React.SetStateAction<IGenre[]>>
+  setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
 const Genres: React.FC<GenresProps> = ({

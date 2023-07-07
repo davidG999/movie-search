@@ -30,6 +30,6 @@ export interface ISingleContentInfo extends ISingleContent {
   genres: IGenre[]
   runtime: string
   overview: string
-  episode_run_time: any
+  episode_run_time: number[]
   popularity: number
 }

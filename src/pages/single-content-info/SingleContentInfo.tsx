@@ -14,9 +14,9 @@ const SingleContentInfo: React.FC = () => {
   id = id || ""
 
   const [content, setContent] = useState<ISingleContentInfo | undefined>()
-  const [contentRatings, setContentRatings] = useState()
+  const [contentRatings, setContentRatings] = useState<string | undefined>()
   const [credits, setCredits] = useState<Credits[]>()
-  const [notFound, setNotFound] = useState<any>(null)
+  const [notFound, setNotFound] = useState<boolean>(false)
   const media_type = (id || "").at(-1) === "t" ? "tv" : "movie"
 
   const { title, name } = content || {}
@@ -29,12 +29,9 @@ const SingleContentInfo: React.FC = () => {
           -1
         )}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
       )
-      const { data } = response
-      setContent(data)
+      setContent(response.data)
     } catch (error) {
-      if (error) {
-        setNotFound(<NotFound />)
-      }
+      setNotFound(true)
     }
   }
 
@@ -47,7 +44,10 @@ const SingleContentInfo: React.FC = () => {
         process.env.REACT_APP_API_KEY
       }&language=en-US`
     )
-    data.results[0] && setContentRatings(data.results[0].rating)
+
+    if (data.results[0]) {
+      setContentRatings(data.results[0].rating)
+    }
   }
 
   const fetchCredits = async () => {
@@ -59,7 +59,10 @@ const SingleContentInfo: React.FC = () => {
     )
 
     if (data.cast.length > 10) data.cast.length = 10
-    data && setCredits(data.cast)
+
+    if (data) {
+      setCredits(data.cast)
+    }
   }
 
   useEffect(() => {
@@ -75,7 +78,9 @@ const SingleContentInfo: React.FC = () => {
 
   return (
     <>
-      {notFound || (
+      {notFound ? (
+        <NotFound />
+      ) : (
         <div className="flex flex-wrap">
           <h3 className="font-bold text-5xl text-gray-200 mb-4 text-center my-3 mx-auto">
             {title || name}

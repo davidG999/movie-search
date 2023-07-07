@@ -1,8 +1,9 @@
+import { IGenre } from "../../../types"
 import removeIcon from "../../assets/icons/remove.svg"
 
 type GenreChipProps = {
   genreTitle: string
-  handleClick: any
+  handleClick: () => void
   isActive?: boolean
 }
 

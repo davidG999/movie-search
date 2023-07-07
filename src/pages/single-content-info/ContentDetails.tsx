@@ -13,7 +13,7 @@ import { ISingleContentInfo } from "../../../types"
 
 type ContentDetailsProps = {
   content: ISingleContentInfo | undefined
-  contentRatings: any
+  contentRatings: string | undefined
 }
 
 const ContentDetails: React.FC<ContentDetailsProps> = ({
@@ -39,7 +39,9 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
     <div className="w-full rounded overflow-hidden shadow-2xl mx-4 flex justify-between">
       <div className="md:flex-shrink-0">
         <img
-          src={poster_path ? `${POSTER_SIZE_300}${poster_path}` : posterUnavailable}
+          src={
+            poster_path ? `${POSTER_SIZE_300}${poster_path}` : posterUnavailable
+          }
           className="rounded"
           alt="Poster"
         />
@@ -50,7 +52,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           <div className="flex text-center">
             <div className="flex-col mr-6">
               <span className="font-semibold text-xl inline-block w-full">
-                {` Date `}
+                Date
               </span>
               <span className="inline-block w-full border border-slate-500 p-1.5">
                 {first_air_date || release_date

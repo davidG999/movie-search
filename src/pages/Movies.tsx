@@ -8,14 +8,14 @@ import Genres from "../components/genre/Genres"
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
 
-import { ISingleContent } from "../../types"
+import { IGenre, ISingleContent } from "../../types"
 
 const Movies: React.FC = () => {
   const [page, setPage] = useState(1)
   const [movies, setMovies] = useState<ISingleContent[]>([])
   const [numOfPages, setNumOfPages] = useState<number>(0)
-  const [genres, setGenres] = useState([])
-  const [selectedGenres, setSelectedGenres] = useState([])
+  const [genres, setGenres] = useState<IGenre[]>([])
+  const [selectedGenres, setSelectedGenres] = useState<IGenre[]>([])
 
   const urlGenres = useGenres(selectedGenres)
 
