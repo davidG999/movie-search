@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import axios from "axios"
+import $api from "../api/api"
 
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
@@ -14,9 +14,7 @@ const Trending: React.FC = () => {
   const [time, setTime] = useState("day")
 
   const fetchTrending = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/trending/all/${time}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
-    )
+    const { data } = await $api.get(`trending/all/${time}?page=${page}`)
 
     setContent(data.results)
     setNumOfPages(data.total_pages)

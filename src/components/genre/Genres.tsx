@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-import axios from "axios"
+import $api from "../../api/api"
 
 import GenreChip from "./GenreChip"
 
@@ -40,10 +40,7 @@ const Genres: React.FC<GenresProps> = ({
   }
 
   const fetchGenres = async () => {
-    const genreListUrl = `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-
-    const { data } = await axios.get(genreListUrl)
-
+    const { data } = await $api.get(`genre/${type}/list`)
     setGenres(data.genres)
   }
 

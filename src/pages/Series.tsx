@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 
-import axios from "axios"
-
 import useGenres from "../hooks/useGenres"
+
+import $api from "../api/api"
 
 import Genres from "../components/genre/Genres"
 import Pagination from "../components/pagination/Pagination"
@@ -20,9 +20,9 @@ const Series: React.FC = () => {
   const urlGenres = useGenres(selectedGenres)
 
   const fetchSeries = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`
-    )
+    const url = `discover/tv?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`
+
+    const { data } = await $api.get(url)
 
     setSeries(data.results)
     setNumOfPages(data.total_pages)

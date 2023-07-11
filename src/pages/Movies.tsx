@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-import axios from "axios"
+import $api from "../api/api"
 
 import useGenres from "../hooks/useGenres"
 
@@ -11,7 +11,7 @@ import SingleContentCard from "../components/single-content-info/SingleContentCa
 import { IGenre, ISingleContent } from "../../types"
 
 const Movies: React.FC = () => {
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState<number>(1)
   const [movies, setMovies] = useState<ISingleContent[]>([])
   const [numOfPages, setNumOfPages] = useState<number>(0)
   const [genres, setGenres] = useState<IGenre[]>([])
@@ -20,9 +20,9 @@ const Movies: React.FC = () => {
   const urlGenres = useGenres(selectedGenres)
 
   const fetchMovies = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`
-    )
+    const url = `discover/movie?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`
+
+    const { data } = await $api.get(url)
 
     setMovies(data.results)
     setNumOfPages(data.total_pages)

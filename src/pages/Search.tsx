@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import axios from "axios"
+import $api from "../api/api"
 
 import Pagination from "../components/pagination/Pagination"
 import SingleContentCard from "../components/single-content-info/SingleContentCard"
@@ -16,11 +16,12 @@ const Search: React.FC = () => {
 
   const fetchSearch = async () => {
     try {
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
-          process.env.REACT_APP_API_KEY
-        }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+      const { data } = await $api.get(
+        `search/${
+          type ? "tv" : "movie"
+        }?query=${searchText}&page=${page}&include_adult=false`
       )
+
       setContent(data.results)
       setNumOfPages(data.total_pages)
     } catch (err) {
