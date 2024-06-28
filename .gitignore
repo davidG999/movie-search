@@ -12,6 +12,7 @@
 /build
 
 # misc
+/.idea
 .DS_Store
 .env.local
 .env.development.local
@@ -23,5 +24,3 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
-
-Notes.md
