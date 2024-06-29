@@ -11,5 +11,5 @@ body {
 }
 
 .layout {
-  @apply flex flex-wrap justify-evenly max-w-screen-lg my-0 mx-auto h-full 2xl:grid 2xl:grid-cols-4 2xl:place-items-stretch gap-9
+  @apply mx-auto my-0 flex h-full max-w-screen-lg flex-wrap justify-evenly gap-9 2xl:grid 2xl:grid-cols-4 2xl:place-items-stretch;
 }

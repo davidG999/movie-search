@@ -12,11 +12,11 @@ const convertDate = (date: string | undefined): string => {
     "Oct",
     "Nov",
     "Dec",
-  ]
+  ];
 
-  const temp_date = date?.split("-")
+  const temp_date = date?.split("-");
 
-  return `${months[Number(temp_date?.[1]) - 1]} ${temp_date?.[2]}, ${temp_date?.[0]}`
-}
+  return `${months[Number(temp_date?.[1]) - 1]} ${temp_date?.[2]}, ${temp_date?.[0]}`;
+};
 
-export default convertDate
+export default convertDate;

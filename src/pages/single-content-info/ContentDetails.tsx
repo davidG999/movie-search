@@ -1,20 +1,20 @@
-import convertDate from "../../utils/single-content-info/convertDate"
-import setEpisodeRuntime from "../../utils/single-content-info/setEpisodeRuntime"
-import minutesToHours from "../../utils/single-content-info/minutesToHours"
-import popularityInfo from "../../utils/single-content-info/popularityInfo"
-import kFormatter from "../../utils/single-content-info/kFormatter"
-import getRatingBg from "../../utils/single-content-info/setRatingBg"
+import convertDate from "../../utils/single-content-info/convertDate";
+import setEpisodeRuntime from "../../utils/single-content-info/setEpisodeRuntime";
+import minutesToHours from "../../utils/single-content-info/minutesToHours";
+import popularityInfo from "../../utils/single-content-info/popularityInfo";
+import kFormatter from "../../utils/single-content-info/kFormatter";
+import getRatingBg from "../../utils/single-content-info/setRatingBg";
 
-import { POSTER_SIZE_300 } from "../../api/api"
+import { POSTER_SIZE_300 } from "../../api/api";
 
-import posterUnavailable from "../../assets/TMDB/poster-unavailbable.jpg"
+import posterUnavailable from "../../assets/TMDB/poster-unavailbable.jpg";
 
-import { ISingleContentInfo } from "../../../types"
+import { ISingleContentInfo } from "../../../types";
 
 type ContentDetailsProps = {
-  content: ISingleContentInfo | undefined
-  contentRatings: string | undefined
-}
+  content: ISingleContentInfo | undefined;
+  contentRatings: string | undefined;
+};
 
 const ContentDetails: React.FC<ContentDetailsProps> = ({
   content,
@@ -31,12 +31,12 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
     overview,
     poster_path,
     popularity,
-  } = content || {}
+  } = content || {};
 
-  const ratingBg = getRatingBg(vote_average)
+  const ratingBg = getRatingBg(vote_average);
 
   return (
-    <div className="w-full rounded overflow-hidden shadow-2xl mx-4 flex justify-between">
+    <div className="mx-4 flex w-full justify-between overflow-hidden rounded shadow-2xl">
       <div className="md:flex-shrink-0">
         <img
           src={
@@ -47,11 +47,11 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
         />
       </div>
 
-      <div className="flex-col flex-grow px-6 py-2">
-        <div className="flex justify-between mb-4">
+      <div className="flex-grow flex-col px-6 py-2">
+        <div className="mb-4 flex justify-between">
           <div className="flex text-center">
-            <div className="flex-col mr-6">
-              <span className="font-semibold text-xl inline-block w-full">
+            <div className="mr-6 flex-col">
+              <span className="inline-block w-full text-xl font-semibold">
                 Date
               </span>
               <span className="inline-block w-full border border-slate-500 p-1.5">
@@ -60,21 +60,21 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
                   : "N/A"}
               </span>
             </div>
-            <div className="flex-col mr-6">
-              <span className="font-semibold text-xl inline-block w-full">
+            <div className="mr-6 flex-col">
+              <span className="inline-block w-full text-xl font-semibold">
                 Runtime
               </span>
               <span className="inline-block w-full border border-slate-500 p-1.5">
                 {episode_run_time
                   ? setEpisodeRuntime(episode_run_time)
                   : runtime
-                  ? minutesToHours(runtime)
-                  : "N/A"}
+                    ? minutesToHours(runtime)
+                    : "N/A"}
               </span>
             </div>
             {contentRatings && (
-              <div className="flex-col mr-6">
-                <span className="font-semibold text-xl inline-block w-full">
+              <div className="mr-6 flex-col">
+                <span className="inline-block w-full text-xl font-semibold">
                   Content rating
                 </span>
                 <span className="inline-block w-full border border-slate-500 p-1.5">
@@ -85,14 +85,14 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           </div>
         </div>
 
-        <div className="flex justify-between mb-4">
+        <div className="mb-4 flex justify-between">
           <div className="flex">
             <div className="flex-col">
               <div className="flex">
                 {genres?.map((g) => (
                   <span
                     key={g.id}
-                    className="last:mr-0 mr-3 px-2 py-1 rounded-full font-semibold text-sm flex align-center w-max bg-gray-600 text-gray-300"
+                    className="align-center mr-3 flex w-max rounded-full bg-gray-600 px-2 py-1 text-sm font-semibold text-gray-300 last:mr-0"
                   >
                     {g.name}
                   </span>
@@ -102,16 +102,15 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           </div>
         </div>
 
-        <div className="flex text-center mb-4">
-          <div className="flex-col mr-6">
-            <span className="font-semibold text-xl inline-block w-full">
+        <div className="mb-4 flex text-center">
+          <div className="mr-6 flex-col">
+            <span className="inline-block w-full text-xl font-semibold">
               TMDb rating
             </span>
             <div className="flex">
               <span
                 title={!vote_average ? "Information not available" : ""}
-                className={`text-white inline-block w-full p-1.5 font-bold text-md
-                ${ratingBg}`}
+                className={`text-md inline-block w-full p-1.5 font-bold text-white ${ratingBg}`}
               >
                 {vote_average
                   ? vote_average.toFixed(vote_average === 10 ? 0 : 1) + "/10"
@@ -119,7 +118,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
               </span>
               <span
                 title="Number of votes"
-                className="bg-gray-500 text-white inline-block w-full p-1.5 font-medium opacity-75"
+                className="inline-block w-full bg-gray-500 p-1.5 font-medium text-white opacity-75"
               >
                 {vote_count ? kFormatter(vote_count) : "N/A"}
               </span>
@@ -129,27 +128,27 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           <div className="flex flex-col">
             <span
               title={popularityInfo}
-              className="font-semibold text-xl inline-block w-full"
+              className="inline-block w-full text-xl font-semibold"
             >
               Popularity
             </span>
             <span
               title={popularityInfo}
-              className="border border-slate-500 w-full h-full pt-1.5"
+              className="h-full w-full border border-slate-500 pt-1.5"
             >
               {popularity && Math.floor(popularity)}
             </span>
           </div>
         </div>
 
-        <div className="border border-gray-400 mb-4"></div>
+        <div className="mb-4 border border-gray-400"></div>
 
         <div className="flex-grow">
           <p className="text-xl text-gray-100">{overview || "No overview"}</p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ContentDetails
+export default ContentDetails;

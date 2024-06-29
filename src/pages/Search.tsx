@@ -1,76 +1,71 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-import $api from "../api/api"
+import $api from "../api/api";
 
-import Pagination from "../components/pagination/Pagination"
-import SingleContentCard from "../components/single-content-info/SingleContentCard"
+import Pagination from "../components/pagination/Pagination";
+import SingleContentCard from "../components/single-content-info/SingleContentCard";
 
-import { ISingleContent } from "../../types"
+import { ISingleContent } from "../../types";
 
 const Search: React.FC = () => {
-  const [type, setType] = useState<0 | 1>(0)
-  const [searchText, setSearchText] = useState<string>("Megamind")
-  const [page, setPage] = useState<number>(1)
-  const [content, setContent] = useState<ISingleContent[]>([])
-  const [numOfPages, setNumOfPages] = useState<number>(0)
+  const [type, setType] = useState<0 | 1>(0);
+  const [searchText, setSearchText] = useState<string>("Megamind");
+  const [page, setPage] = useState<number>(1);
+  const [content, setContent] = useState<ISingleContent[]>([]);
+  const [numOfPages, setNumOfPages] = useState<number>(0);
 
   const fetchSearch = async () => {
     try {
       const { data } = await $api.get(
         `search/${
           type ? "tv" : "movie"
-        }?query=${searchText}&page=${page}&include_adult=false`
-      )
+        }?query=${searchText}&page=${page}&include_adult=false`,
+      );
 
-      setContent(data.results)
-      setNumOfPages(data.total_pages)
+      setContent(data.results);
+      setNumOfPages(data.total_pages);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
   useEffect(() => {
-    window.scroll(0, 0)
-    fetchSearch()
+    window.scroll(0, 0);
+    fetchSearch();
     // eslint-disable-next-line
-  }, [type, searchText, page])
+  }, [type, searchText, page]);
 
   return (
     <div className="bg-zinc-800">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">
+      <h2 className="p-1 text-center text-3xl font-extrabold uppercase tracking-wider text-slate-300">
         Search
       </h2>
 
-      <div className="flex my-3 justify-center">
+      <div className="my-3 flex justify-center">
         <input
           type="search"
           placeholder="Search..."
           onChange={(e) => setSearchText(e.target.value)}
-          className="w-full text-gray-100 bg-gray-700 rounded transition ease-in-out p-3 mx-4 mt-4
-            focus:text-gray-200 focus:bg-gray-600 focus:outline-none"
+          className="mx-4 mt-4 w-full rounded bg-gray-700 p-3 text-gray-100 transition ease-in-out focus:bg-gray-600 focus:text-gray-200 focus:outline-none"
         />
       </div>
 
-      <ul className="p-1 m-3 flex justify-center text-center font-semibold text-gray-100 select-none">
+      <ul className="m-3 flex select-none justify-center p-1 text-center font-semibold text-gray-100">
         <li
           onClick={() => {
-            setType(0)
-            setPage(1)
+            setType(0);
+            setPage(1);
           }}
-          className={`mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded hover:scale-103
-          ${!type && "bg-slate-600"}
-          `}
+          className={`mr-2 cursor-pointer rounded border border-solid border-slate-600 p-4 hover:scale-103 ${!type && "bg-slate-600"} `}
         >
           Movies
         </li>
         <li
           onClick={() => {
-            setType(1)
-            setPage(1)
+            setType(1);
+            setPage(1);
           }}
-          className={`mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded hover:scale-103
-          ${type && "bg-slate-600"}
-          `}
+          className={`mr-2 cursor-pointer rounded border border-solid border-slate-600 p-4 hover:scale-103 ${type && "bg-slate-600"} `}
         >
           TV Series
         </li>
@@ -102,7 +97,7 @@ const Search: React.FC = () => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

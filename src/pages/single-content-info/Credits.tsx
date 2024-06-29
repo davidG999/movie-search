@@ -1,27 +1,27 @@
-import shortenNameAndCharacter from "../../utils/single-content-info/shortenNameAndCharacter"
+import shortenNameAndCharacter from "../../utils/single-content-info/shortenNameAndCharacter";
 
-import { POSTER_SIZE_154, POSTER_SIZE_500 } from "../../api/api"
+import { POSTER_SIZE_154, POSTER_SIZE_500 } from "../../api/api";
 
-import noPicture from "../../assets/TMDB/no-picture.jpg"
+import noPicture from "../../assets/TMDB/no-picture.jpg";
 
-import { Credits } from "../../../types"
+import { Credits } from "../../../types";
 
 type CredistProps = {
-  credits: Credits[]
-}
+  credits: Credits[];
+};
 
 const CreditsSection: React.FC<CredistProps> = ({ credits }) => {
   const setImg = (c: Credits) => {
-    const imageSize = credits.length > 5 ? POSTER_SIZE_500 : POSTER_SIZE_154
-    return c.profile_path ? `${imageSize}${c.profile_path}` : noPicture
-  }
+    const imageSize = credits.length > 5 ? POSTER_SIZE_500 : POSTER_SIZE_154;
+    return c.profile_path ? `${imageSize}${c.profile_path}` : noPicture;
+  };
 
   return (
-    <div className="flex rounded shadow-2xl m-4 pb-20">
+    <div className="m-4 flex rounded pb-20 shadow-2xl">
       {credits?.map((c) => (
         <div
           key={c.id}
-          className="w-full rounded-lg bg-movie-card mr-2 last:mr-0"
+          className="mr-2 w-full rounded-lg bg-movie-card last:mr-0"
         >
           <img
             className={`w-full rounded-t-lg ${!c.profile_path && "w-200"}`}
@@ -39,7 +39,7 @@ const CreditsSection: React.FC<CredistProps> = ({ credits }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default CreditsSection
+export default CreditsSection;

@@ -1,56 +1,52 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-import $api from "../api/api"
+import $api from "../api/api";
 
-import Pagination from "../components/pagination/Pagination"
-import SingleContentCard from "../components/single-content-info/SingleContentCard"
+import Pagination from "../components/pagination/Pagination";
+import SingleContentCard from "../components/single-content-info/SingleContentCard";
 
-import { ISingleContent } from "../../types"
+import { ISingleContent } from "../../types";
 
 const Trending: React.FC = () => {
-  const [page, setPage] = useState<number>(1)
-  const [numOfPages, setNumOfPages] = useState<number>(0)
-  const [content, setContent] = useState<ISingleContent[]>([])
-  const [time, setTime] = useState("day")
+  const [page, setPage] = useState<number>(1);
+  const [numOfPages, setNumOfPages] = useState<number>(0);
+  const [content, setContent] = useState<ISingleContent[]>([]);
+  const [time, setTime] = useState("day");
 
   const fetchTrending = async () => {
-    const { data } = await $api.get(`trending/all/${time}?page=${page}`)
+    const { data } = await $api.get(`trending/all/${time}?page=${page}`);
 
-    setContent(data.results)
-    setNumOfPages(data.total_pages)
-  }
+    setContent(data.results);
+    setNumOfPages(data.total_pages);
+  };
 
   useEffect(() => {
-    fetchTrending()
+    fetchTrending();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time, page])
+  }, [time, page]);
 
   return (
     <div className="">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold tracking-wider p-1 text-3xl transition duration-500 ease-out">
+      <h2 className="p-1 text-center text-3xl font-extrabold uppercase tracking-wider text-slate-300 transition duration-500 ease-out">
         Trending
       </h2>
 
-      <ul className="p-1 my-3 flex justify-center text-center font-semibold text-gray-100 select-none">
+      <ul className="my-3 flex select-none justify-center p-1 text-center font-semibold text-gray-100">
         <li
           onClick={() => {
-            setTime("day")
-            setPage(1)
+            setTime("day");
+            setPage(1);
           }}
-          className={`mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded hover:scale-103
-          ${time === "day" ? "bg-slate-600" : ""}
-          `}
+          className={`mr-2 cursor-pointer rounded border border-solid border-slate-600 p-4 hover:scale-103 ${time === "day" ? "bg-slate-600" : ""} `}
         >
           Today
         </li>
         <li
           onClick={() => {
-            setTime("week")
-            setPage(1)
+            setTime("week");
+            setPage(1);
           }}
-          className={`mr-2 cursor-pointer p-4 border border-solid border-slate-600 rounded hover:scale-103
-          ${time === "week" ? "bg-slate-600" : ""}
-          `}
+          className={`mr-2 cursor-pointer rounded border border-solid border-slate-600 p-4 hover:scale-103 ${time === "week" ? "bg-slate-600" : ""} `}
         >
           This week
         </li>
@@ -70,7 +66,7 @@ const Trending: React.FC = () => {
               vote_count={c.vote_count}
               popularity={c.popularity}
             />
-          )
+          );
         })}
       </div>
 
@@ -82,7 +78,7 @@ const Trending: React.FC = () => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Trending
+export default Trending;

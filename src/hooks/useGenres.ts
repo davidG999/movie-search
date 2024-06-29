@@ -1,13 +1,13 @@
-import { IGenre } from "../../types"
+import { IGenre } from "../../types";
 
 const useGenres = (selectedGenres: IGenre[]): string => {
   if (selectedGenres.length < 1) {
-    return ""
+    return "";
   }
 
-  const genreIds: number[] = selectedGenres.map((g) => g.id)
+  const genreIds: number[] = selectedGenres.map((g) => g.id);
 
-  return genreIds.reduce((acc, curr) => acc + "," + curr.toString(), "")
-}
+  return genreIds.reduce((acc, curr) => acc + "," + curr.toString(), "");
+};
 
-export default useGenres
+export default useGenres;

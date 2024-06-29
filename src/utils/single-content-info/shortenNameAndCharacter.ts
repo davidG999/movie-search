@@ -1,8 +1,8 @@
 const shortenNameAndCharacter = (str: string): string => {
   if (str?.length > 15) {
-    return str.substring(0, 14) + "..."
+    return str.substring(0, 14) + "...";
   }
-  return str
-}
+  return str;
+};
 
-export default shortenNameAndCharacter
+export default shortenNameAndCharacter;

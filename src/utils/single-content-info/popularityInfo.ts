@@ -5,6 +5,6 @@ const popularityInfo = `Popularity is based on the information below
 • Number of users who added it to their "watchlist" for the day
 • Release date / Next/last episode to air date
 • Number of total votes 
-• Previous days score`
+• Previous days score`;
 
-export default popularityInfo
+export default popularityInfo;

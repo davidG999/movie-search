@@ -1,16 +1,16 @@
-import NavItem from "./NavItem"
+import NavItem from "./NavItem";
 
-import trendingIcon from "../../assets/icons/trendingIcon.svg"
-import movieIcon from "../../assets/icons/movieIcon.svg"
-import tvIcon from "../../assets/icons/tvIcon.svg"
-import searchIcon from "../../assets/icons/searchIcon.svg"
-import tmdbLogo from "../../assets/TMDB/tmdb-logo.svg"
+import trendingIcon from "../../assets/icons/trendingIcon.svg";
+import movieIcon from "../../assets/icons/movieIcon.svg";
+import tvIcon from "../../assets/icons/tvIcon.svg";
+import searchIcon from "../../assets/icons/searchIcon.svg";
+import tmdbLogo from "../../assets/TMDB/tmdb-logo.svg";
 
 const Navbar: React.FC = () => {
-  const TMDB_URL = "https://www.themoviedb.org/"
-  
+  const TMDB_URL = "https://www.themoviedb.org/";
+
   return (
-    <div className="w-full fixed bottom-0 z-50 flex justify-center items-center bg-zinc-900 font-bold pt-2 pb-1">
+    <div className="fixed bottom-0 z-50 flex w-full items-center justify-center bg-zinc-900 pb-1 pt-2 font-bold">
       <NavItem icon={trendingIcon} title="Trending" page="/" />
       <NavItem icon={movieIcon} title="Movies" page="/movies" />
       <NavItem icon={tvIcon} title="TV Series" page="/series" />
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
         </a>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -1,18 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Trending from "./pages/Trending"
-import Movies from "./pages/Movies"
-import Series from "./pages/Series"
-import Search from "./pages/Search"
-import NotFound from "./pages/NotFound"
-import SingleContentInfo from "./pages/single-content-info/SingleContentInfo"
-import Navbar from "./components/navbar/Navbar"
+import Trending from "./pages/Trending";
+import Movies from "./pages/Movies";
+import Series from "./pages/Series";
+import Search from "./pages/Search";
+import NotFound from "./pages/NotFound";
+import SingleContentInfo from "./pages/single-content-info/SingleContentInfo";
+import Navbar from "./components/navbar/Navbar";
 
-import "./index.css"
+import "./index.css";
 
 const App: React.FC = () => {
   return (
-    <div className="text-gray-300 bg-zinc-800 selection:bg-slate-700 selection:text-cyan-400">
+    <div className="bg-zinc-800 text-gray-300 selection:bg-slate-700 selection:text-cyan-400">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Trending />} />
@@ -25,7 +25,7 @@ const App: React.FC = () => {
         <Navbar />
       </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

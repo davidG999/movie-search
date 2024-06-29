@@ -1,41 +1,41 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
-import useGenres from "../hooks/useGenres"
+import useGenres from "../hooks/useGenres";
 
-import $api from "../api/api"
+import $api from "../api/api";
 
-import Genres from "../components/genre/Genres"
-import Pagination from "../components/pagination/Pagination"
-import SingleContentCard from "../components/single-content-info/SingleContentCard"
+import Genres from "../components/genre/Genres";
+import Pagination from "../components/pagination/Pagination";
+import SingleContentCard from "../components/single-content-info/SingleContentCard";
 
-import { IGenre, ISingleContent } from "../../types"
+import { IGenre, ISingleContent } from "../../types";
 
 const Series: React.FC = () => {
-  const [page, setPage] = useState(1)
-  const [series, setSeries] = useState<ISingleContent[]>([])
-  const [numOfPages, setNumOfPages] = useState<number>(0)
-  const [genres, setGenres] = useState<IGenre[]>([])
-  const [selectedGenres, setSelectedGenres] = useState<IGenre[]>([])
+  const [page, setPage] = useState(1);
+  const [series, setSeries] = useState<ISingleContent[]>([]);
+  const [numOfPages, setNumOfPages] = useState<number>(0);
+  const [genres, setGenres] = useState<IGenre[]>([]);
+  const [selectedGenres, setSelectedGenres] = useState<IGenre[]>([]);
 
-  const urlGenres = useGenres(selectedGenres)
+  const urlGenres = useGenres(selectedGenres);
 
   const fetchSeries = async () => {
-    const url = `discover/tv?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`
+    const url = `discover/tv?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`;
 
-    const { data } = await $api.get(url)
+    const { data } = await $api.get(url);
 
-    setSeries(data.results)
-    setNumOfPages(data.total_pages)
-  }
+    setSeries(data.results);
+    setNumOfPages(data.total_pages);
+  };
 
   useEffect(() => {
-    fetchSeries()
+    fetchSeries();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, urlGenres])
+  }, [page, urlGenres]);
 
   return (
     <div className="bg-zinc-800">
-      <h2 className="text-slate-300 text-center uppercase font-extrabold p-1 text-3xl tracking-wider">
+      <h2 className="p-1 text-center text-3xl font-extrabold uppercase tracking-wider text-slate-300">
         TV Series
       </h2>
 
@@ -60,7 +60,7 @@ const Series: React.FC = () => {
               media_type="tv"
               vote_average={m.vote_average}
             />
-          )
+          );
         })}
       </div>
 
@@ -72,7 +72,7 @@ const Series: React.FC = () => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Series
+export default Series;
