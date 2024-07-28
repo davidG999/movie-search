@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import $api from "../api/api";
+import $api from "../utils/api";
 
 import Pagination from "../components/pagination/Pagination";
 import SingleContentCard from "../components/single-content-info/SingleContentCard";
@@ -53,21 +53,28 @@ const Trending: React.FC = () => {
       </ul>
 
       <div className="layout">
-        {content?.map((c) => {
-          return (
-            <SingleContentCard
-              key={c.id}
-              id={c.id}
-              poster={c.poster_path}
-              title={c.title || c.name}
-              date={c.release_date || c.first_air_date}
-              media_type={c.media_type}
-              vote_average={c.vote_average}
-              vote_count={c.vote_count}
-              popularity={c.popularity}
-            />
-          );
-        })}
+        {content?.map(
+          ({
+            id,
+            poster_path,
+            title,
+            name,
+            release_date,
+            first_air_date,
+            ...rest
+          }) => {
+            return (
+              <SingleContentCard
+                key={id}
+                id={id}
+                poster={poster_path}
+                title={title || name}
+                date={release_date || first_air_date}
+                {...rest}
+              />
+            );
+          },
+        )}
       </div>
 
       {numOfPages > 1 && (

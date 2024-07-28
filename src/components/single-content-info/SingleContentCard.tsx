@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { POSTER_SIZE_300 } from "../../api/api";
+import { POSTER_SIZE_300 } from "../../utils/api";
 
 import getRatingBg from "../../utils/single-content-info/setRatingBg";
 import formatTitle from "../../utils/single-content-info/displayTitle";

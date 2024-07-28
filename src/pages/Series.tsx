@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import useGenres from "../hooks/useGenres";
 
-import $api from "../api/api";
+import $api from "../utils/api";
 
 import Genres from "../components/genre/Genres";
 import Pagination from "../components/pagination/Pagination";
 import SingleContentCard from "../components/single-content-info/SingleContentCard";
 
 import { IGenre, ISingleContent } from "../../types";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosError, AxiosResponse } from "axios";
 
 const Series: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -19,19 +21,25 @@ const Series: React.FC = () => {
 
   const urlGenres = useGenres(selectedGenres);
 
-  const fetchSeries = async () => {
-    const url = `discover/tv?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`;
+  const url = `discover/tv?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`;
 
-    const { data } = await $api.get(url);
-
-    setSeries(data.results);
-    setNumOfPages(data.total_pages);
-  };
+  const { data, isLoading } = useQuery<
+    AxiosResponse<{
+      page: number;
+      results: ISingleContent[];
+      total_pages: number;
+      total_results: number;
+    }>,
+    AxiosError
+  >({
+    queryKey: [url],
+    queryFn: () => $api.get(url),
+  });
 
   useEffect(() => {
-    fetchSeries();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, urlGenres]);
+    if (!data || isLoading) return;
+    setNumOfPages(data.data.total_pages);
+  }, [urlGenres]);
 
   return (
     <div className="bg-zinc-800">
@@ -49,19 +57,20 @@ const Series: React.FC = () => {
       />
 
       <div className="layout">
-        {series?.map((m) => {
-          return (
-            <SingleContentCard
-              key={m.id}
-              id={m.id}
-              poster={m.poster_path}
-              title={m.title || m.name}
-              date={m.release_date || m.first_air_date}
-              media_type="tv"
-              vote_average={m.vote_average}
-            />
-          );
-        })}
+        {data &&
+          data.data.results?.map((m) => {
+            return (
+              <SingleContentCard
+                key={m.id}
+                id={m.id}
+                poster={m.poster_path}
+                title={m.title || m.name}
+                date={m.release_date || m.first_air_date}
+                media_type="tv"
+                vote_average={m.vote_average}
+              />
+            );
+          })}
       </div>
 
       {numOfPages > 1 && (

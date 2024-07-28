@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-
-import $api from "../../api/api";
+import $api from "../../utils/api";
 
 import GenreChip from "./GenreChip";
+import { AxiosError, AxiosResponse } from "axios";
 
 import removeIcon from "../../assets/icons/remove.svg";
 
 import { IGenre } from "../../../types";
+import { useQuery } from "@tanstack/react-query";
 
 type GenresProps = {
   type: string;
@@ -25,6 +25,15 @@ const Genres: React.FC<GenresProps> = ({
   setSelectedGenres,
   setPage,
 }) => {
+  const { data, refetch } = useQuery<
+    AxiosResponse<{ genres: IGenre[] }>,
+    AxiosError
+  >({
+    queryKey: ["genres", type, "list"],
+    queryFn: () => $api.get(`genre/${type}/list`),
+    staleTime: 1 * 1000 * 60 * 60 * 24, // 24 hours
+  });
+
   const handleAdd = (genre: IGenre) => {
     setSelectedGenres([...selectedGenres, genre]);
     setGenres(genres.filter((g) => g.id !== genre.id));
@@ -39,19 +48,9 @@ const Genres: React.FC<GenresProps> = ({
     setPage(1);
   };
 
-  const fetchGenres = async () => {
-    const { data } = await $api.get(`genre/${type}/list`);
-    setGenres(data.genres);
-  };
-
   const deselectAll = () => {
     setSelectedGenres([]);
-    fetchGenres();
   };
-
-  useEffect(() => {
-    fetchGenres();
-  }, []);
 
   return (
     <div className="mx-32 my-3 flex flex-wrap justify-center space-x-2">
@@ -76,18 +75,20 @@ const Genres: React.FC<GenresProps> = ({
         <GenreChip
           key={genre.id}
           genreTitle={genre.name}
-          isActive={true}
+          isActive
           handleClick={() => handleRemove(genre)}
         />
       ))}
 
-      {genres?.map((genre) => (
-        <GenreChip
-          key={genre.id}
-          genreTitle={genre.name}
-          handleClick={() => handleAdd(genre)}
-        />
-      ))}
+      {data?.data.genres
+        .filter((g) => !selectedGenres.find((e) => e.id === g.id))
+        ?.map((genre) => (
+          <GenreChip
+            key={genre.id}
+            genreTitle={genre.name}
+            handleClick={() => handleAdd(genre)}
+          />
+        ))}
     </div>
   );
 };

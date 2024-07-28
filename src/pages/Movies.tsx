@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import $api from "../api/api";
+import $api from "../utils/api";
 
 import useGenres from "../hooks/useGenres";
 
@@ -9,29 +9,35 @@ import Pagination from "../components/pagination/Pagination";
 import SingleContentCard from "../components/single-content-info/SingleContentCard";
 
 import { IGenre, ISingleContent } from "../../types";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosError, AxiosResponse } from "axios";
 
 const Movies: React.FC = () => {
-  const [page, setPage] = useState<number>(1);
-  const [movies, setMovies] = useState<ISingleContent[]>([]);
-  const [numOfPages, setNumOfPages] = useState<number>(0);
+  const [page, setPage] = useState(1);
+  const [numOfPages, setNumOfPages] = useState(0);
   const [genres, setGenres] = useState<IGenre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<IGenre[]>([]);
 
   const urlGenres = useGenres(selectedGenres);
 
-  const fetchMovies = async () => {
-    const url = `discover/movie?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`;
-
-    const { data } = await $api.get(url);
-
-    setMovies(data.results);
-    setNumOfPages(data.total_pages);
-  };
+  const url = `discover/movie?sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${urlGenres}`;
+  const { data, isLoading } = useQuery<
+    AxiosResponse<{
+      page: number;
+      results: ISingleContent[];
+      total_pages: number;
+      total_results: number;
+    }>,
+    AxiosError
+  >({
+    queryKey: [url],
+    queryFn: () => $api.get(url),
+  });
 
   useEffect(() => {
-    fetchMovies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, urlGenres]);
+    if (!data || isLoading) return;
+    setNumOfPages(data.data.total_pages);
+  }, [urlGenres]);
 
   return (
     <div className="">
@@ -49,19 +55,22 @@ const Movies: React.FC = () => {
       />
 
       <div className="layout">
-        {movies?.map((m) => {
-          return (
-            <SingleContentCard
-              key={m.id}
-              id={m.id}
-              poster={m.poster_path}
-              title={m.title || m.name}
-              date={m.release_date || m.first_air_date}
-              media_type="movie"
-              vote_average={m.vote_average}
-            />
-          );
-        })}
+        {data &&
+          data.data.results
+            .filter((s) => s.id)
+            ?.map((m) => {
+              return (
+                <SingleContentCard
+                  key={m.id}
+                  id={m.id}
+                  poster={m.poster_path}
+                  title={m.title || m.name}
+                  date={m.release_date || m.first_air_date}
+                  media_type="movie"
+                  vote_average={m.vote_average}
+                />
+              );
+            })}
       </div>
 
       {numOfPages > 1 && (

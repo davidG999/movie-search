@@ -5,7 +5,7 @@ import popularityInfo from "../../utils/single-content-info/popularityInfo";
 import kFormatter from "../../utils/single-content-info/kFormatter";
 import getRatingBg from "../../utils/single-content-info/setRatingBg";
 
-import { POSTER_SIZE_300 } from "../../api/api";
+import { POSTER_SIZE_300 } from "../../utils/api";
 
 import posterUnavailable from "../../assets/TMDB/poster-unavailbable.jpg";
 

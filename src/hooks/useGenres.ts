@@ -1,13 +1,7 @@
 import { IGenre } from "../../types";
 
 const useGenres = (selectedGenres: IGenre[]): string => {
-  if (selectedGenres.length < 1) {
-    return "";
-  }
-
-  const genreIds: number[] = selectedGenres.map((g) => g.id);
-
-  return genreIds.reduce((acc, curr) => acc + "," + curr.toString(), "");
+  return selectedGenres.map((g) => g.id).join(",");
 };
 
 export default useGenres;

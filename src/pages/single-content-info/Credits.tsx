@@ -1,6 +1,6 @@
 import shortenNameAndCharacter from "../../utils/single-content-info/shortenNameAndCharacter";
 
-import { POSTER_SIZE_154, POSTER_SIZE_500 } from "../../api/api";
+import { POSTER_SIZE_154, POSTER_SIZE_500 } from "../../utils/api";
 
 import noPicture from "../../assets/TMDB/no-picture.jpg";
 

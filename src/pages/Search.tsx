@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import $api from "../api/api";
+import $api from "../utils/api";
 
 import Pagination from "../components/pagination/Pagination";
 import SingleContentCard from "../components/single-content-info/SingleContentCard";
