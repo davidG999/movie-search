@@ -40,7 +40,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <ul
         className={`inline-flex pages:cursor-pointer pages:border pages:px-3 pages:py-2 pages:text-gray-200`}
       >
-        {Array(numOfPages).map((e, i) => (
+        {Array(numOfPages).map((_e, i) => (
           <PageNumberElement
             number={i + 1}
             key={i + 1}
