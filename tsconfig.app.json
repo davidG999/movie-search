@@ -18,6 +18,12 @@
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Custom */
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+    }
   },
 }
